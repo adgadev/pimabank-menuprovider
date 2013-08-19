@@ -1,0 +1,16 @@
+<menu>
+	<category>$root.CATEGORY1</category>
+	<menupositions>	
+		#foreach($menuposition in $root.ITEMLOOP1)
+			#foreach($price in $menuposition.PRICELOOP3)
+				<menuposition>
+					<id>$menuposition.ID3</id>
+					<name>$menuposition.NAME3</name>
+					<description>$menuposition.DESC3</description>
+					<subtype>$root.SIZELOOP1[$foreach.index].SIZE3</subtype>
+					<price>$price.PRICE5</price>
+				</menuposition>
+			#end
+		#end	
+	</menupositions>
+</menu>

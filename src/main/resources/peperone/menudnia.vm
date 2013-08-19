@@ -1,0 +1,17 @@
+<menu>
+	<category>Danie dnia</category>
+	<menupositions>
+		<menuposition>
+			<id>0</id>
+			<name>$root.SOUPNAME1</name>
+			<price>$root.SOUPPRICE1</price>
+		</menuposition>
+		#foreach($menuposition in $root.ITEMLOOP1)
+		<menuposition>
+			<id>$menuposition.ID3</id>
+			<name>$menuposition.NAME3</name>
+			<price>$root.PRICE1</price>
+		</menuposition>
+	#end	
+	</menupositions>
+</menu>
