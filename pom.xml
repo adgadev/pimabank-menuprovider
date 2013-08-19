@@ -7,7 +7,7 @@
 
 	<scm>
 		<connection>scm:git:https://github.com/grexag/pimabank-menuprovider.git</connection>
-		<developerConnection>scm:git:git@github.com:grexag/pimabank-menuprovider.git</developerConnection>
+		<developerConnection>scm:git:https://github.com/grexag/pimabank-menuprovider.git</developerConnection>
 		<url>https://github.com/grexag/pimabank-menuprovider</url>
 	</scm>
 
