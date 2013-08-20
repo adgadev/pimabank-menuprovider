@@ -53,13 +53,13 @@
 				</configuration> -->
 			</plugin> 
 
-			<plugin>
+			<!-- <plugin>
 				<artifactId>maven-deploy-plugin</artifactId>
 				<version>2.7</version>
 				<configuration>
 					<altDeploymentRepository>internal.repo::default::file://${project.build.directory}/mvn-repo</altDeploymentRepository>
 				</configuration>
-			</plugin>
+			</plugin> -->
 			<plugin>
 				<groupId>com.github.github</groupId>
 				<artifactId>site-maven-plugin</artifactId>
