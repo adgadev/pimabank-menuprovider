@@ -2,7 +2,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.grexdev.pimabank</groupId>
 	<artifactId>restaurants-menu-provider</artifactId>
-	<version>0.0.20-SNAPSHOT</version>
+	<version>0.0.22-SNAPSHOT</version>
 
 	<scm>
 		<connection>scm:git:https://github.com/grexag/pimabank-menuprovider.git</connection>
