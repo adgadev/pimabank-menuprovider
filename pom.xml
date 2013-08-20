@@ -71,15 +71,15 @@
 					<repositoryName>pimabank-menuprovider</repositoryName>      <!-- github repo name -->
 					<repositoryOwner>grexag</repositoryOwner>    <!-- github username -->
 				</configuration>
-				<!-- <executions> -->
+				<executions>
 					<!-- run site-maven-plugin's 'site' target as part of the build's normal 'deploy' phase -->
-				<!-- 	<execution>
+				 	<execution>
 						<goals>
 							<goal>site</goal>
 						</goals>
 						<phase>deploy</phase>
 					</execution> 
-				</executions>-->
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
