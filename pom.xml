@@ -44,9 +44,9 @@
         <useReleaseProfile>false</useReleaseProfile>
         <releaseProfiles>release</releaseProfiles>
         <autoVersionSubmodules>true</autoVersionSubmodules> -->
-      	<username>${github.username}</username>
+   <!--    	<username>${github.username}</username>
 		<password>${github.password}</password>
-			</configuration> 
+		-->	</configuration> 
 			</plugin> 
 
 			 <plugin>
@@ -65,6 +65,8 @@
 					<noJekyll>true</noJekyll>                                  <!-- disable webpage processing -->
 					<outputDirectory>${project.build.directory}/mvn-repo</outputDirectory> <!-- matches distribution management repository url above -->
 					<branch>refs/heads/mvn-repo</branch>                       <!-- remote branch name -->
+					<merge>true</merge>
+					
 					<includes>
 						<include>**/*</include>
 					</includes>
