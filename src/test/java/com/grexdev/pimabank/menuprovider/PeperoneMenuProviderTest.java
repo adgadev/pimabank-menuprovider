@@ -36,7 +36,7 @@ public class PeperoneMenuProviderTest {
 
     private MenuConfiguration createMenuConfiguration(String menuPage) {
         return new MenuConfiguration("http://localhost:18723/", menuPage);
-        // return new MenuConfiguration("http://peperone.pl/", menuPage);
+     //    return new MenuConfiguration("http://peperone.pl/", menuPage);
     }
 
     @Test

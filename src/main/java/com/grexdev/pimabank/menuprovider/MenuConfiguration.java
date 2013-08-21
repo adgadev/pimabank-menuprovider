@@ -10,7 +10,10 @@ import lombok.RequiredArgsConstructor;
 public class MenuConfiguration {
     
     private final String restaurantPageBaseUrl;
-    
+   
+    /**
+     * pageName is mainly for testing
+     */
     private String pageName;
     
 }

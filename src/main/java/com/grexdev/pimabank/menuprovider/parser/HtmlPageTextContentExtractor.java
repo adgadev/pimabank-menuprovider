@@ -1,4 +1,4 @@
-package com.grexdev.pimabank.menuprovider.peperone;
+package com.grexdev.pimabank.menuprovider.parser;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -20,13 +20,13 @@ import org.w3c.dom.NodeList;
 import org.w3c.tidy.Tidy;
 
 @Slf4j
-public class HtmlPageToTextTransformer {
+public class HtmlPageTextContentExtractor {
 
     private XPathFactory xPathFactory = XPathFactory.newInstance();
 
-    public String convertHtmlPageToText(InputStream inputStream, String xPathExpressionForPage) throws XPathExpressionException {
+    public String extractTextContent(InputStream inputStream, String htmlBlockXPathExpression) throws XPathExpressionException {
         Document document = getValidXmlDocument(inputStream);
-        XPathExpression xPathExpression = constructXPathExpression(xPathExpressionForPage);
+        XPathExpression xPathExpression = constructXPathExpression(htmlBlockXPathExpression);
         Object result = xPathExpression.evaluate(document, XPathConstants.NODESET);
 
         StringBuilder textContent = new StringBuilder();
@@ -62,11 +62,6 @@ public class HtmlPageToTextTransformer {
     private XPathExpression constructXPathExpression(String expression) throws XPathExpressionException {
         XPath xPath = xPathFactory.newXPath();
         return xPath.compile(expression);
-    }
-
-    private String getExpression() {
-        //return "//table[@class='contentpaneopen']//span//node()";
-        return "//table[@class='contentpaneopen']//p//node()";
     }
 
 }

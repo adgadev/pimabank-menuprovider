@@ -9,7 +9,7 @@ import java.net.URL;
 
 import org.apache.commons.io.IOUtils;
 
-public class HttpPageDownloader {
+public class HttpWebPageFetcher {
 
     public InputStream downloadPage(String urlAddress) throws IOException {
         URL url = new URL(urlAddress);

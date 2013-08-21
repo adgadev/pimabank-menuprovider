@@ -18,7 +18,8 @@ import com.grexdev.pimabank.menuprovider.MenuProvider;
 import com.grexdev.pimabank.menuprovider.dto.MenuPage;
 import com.grexdev.pimabank.menuprovider.exception.MenuProviderException;
 import com.grexdev.pimabank.menuprovider.parser.DigesterDtoInstantiator;
-import com.grexdev.pimabank.menuprovider.parser.HttpPageDownloader;
+import com.grexdev.pimabank.menuprovider.parser.HtmlPageTextContentExtractor;
+import com.grexdev.pimabank.menuprovider.parser.HttpWebPageFetcher;
 import com.grexdev.pimabank.menuprovider.parser.NamedGroupRegistry;
 import com.grexdev.pimabank.menuprovider.parser.RegexGroupExtractor;
 import com.grexdev.pimabank.menuprovider.parser.NamedGroupConfigurationProvider;
@@ -27,7 +28,7 @@ import com.grexdev.pimabank.menuprovider.parser.VelocityXmlTemplator;
 @Slf4j
 public class PeperoneMenuProvider implements MenuProvider {
 
-    private HttpPageDownloader httpPageDownloader = new HttpPageDownloader();
+    private HttpWebPageFetcher httpPageDownloader = new HttpWebPageFetcher();
 
     private NamedGroupConfigurationProvider regexpConfigurationProvider = new NamedGroupConfigurationProvider();
 
@@ -54,8 +55,8 @@ public class PeperoneMenuProvider implements MenuProvider {
             String fullPageUrl = restaurantPageBaseUrl + menuPageMetadata.getUrlSuffix();
             InputStream inputStream = httpPageDownloader.downloadPage(fullPageUrl);
 
-            HtmlPageToTextTransformer htmlToTextTransformer = new HtmlPageToTextTransformer();
-            String text = htmlToTextTransformer.convertHtmlPageToText(inputStream, menuPageMetadata.getXPathExpression());
+            HtmlPageTextContentExtractor htmlToTextTransformer = new HtmlPageTextContentExtractor();
+            String text = htmlToTextTransformer.extractTextContent(inputStream, menuPageMetadata.getXPathExpression());
 
             Map<String, String> namedRegexpGroups = regexpConfigurationProvider.getNamedRegexpGroups(menuPageMetadata.getParserRegexpResource());
             RegexGroupExtractor regexGroupExtractor = new RegexGroupExtractor(new NamedGroupRegistry(namedRegexpGroups));
