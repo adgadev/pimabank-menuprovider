@@ -55,7 +55,7 @@ public class PeperoneMenuProvider implements MenuProvider {
             InputStream inputStream = httpPageDownloader.downloadPage(fullPageUrl);
 
             HtmlPageToTextTransformer htmlToTextTransformer = new HtmlPageToTextTransformer();
-            String text = htmlToTextTransformer.convertHtmlPageToText(inputStream);
+            String text = htmlToTextTransformer.convertHtmlPageToText(inputStream, menuPageMetadata.getXPathExpression());
 
             Map<String, String> namedRegexpGroups = regexpConfigurationProvider.getNamedRegexpGroups(menuPageMetadata.getParserRegexpResource());
             RegexGroupExtractor regexGroupExtractor = new RegexGroupExtractor(new NamedGroupRegistry(namedRegexpGroups));

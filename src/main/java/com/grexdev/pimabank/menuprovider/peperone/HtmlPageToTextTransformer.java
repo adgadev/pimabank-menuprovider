@@ -24,10 +24,9 @@ public class HtmlPageToTextTransformer {
 
     private XPathFactory xPathFactory = XPathFactory.newInstance();
 
-    public String convertHtmlPageToText(InputStream inputStream) throws XPathExpressionException {
+    public String convertHtmlPageToText(InputStream inputStream, String xPathExpressionForPage) throws XPathExpressionException {
         Document document = getValidXmlDocument(inputStream);
-        String expression = getExpression();
-        XPathExpression xPathExpression = constructXPathExpression(expression);
+        XPathExpression xPathExpression = constructXPathExpression(xPathExpressionForPage);
         Object result = xPathExpression.evaluate(document, XPathConstants.NODESET);
 
         StringBuilder textContent = new StringBuilder();
@@ -66,7 +65,8 @@ public class HtmlPageToTextTransformer {
     }
 
     private String getExpression() {
-        return "//table[@class='contentpaneopen']//span//node()";
+        //return "//table[@class='contentpaneopen']//span//node()";
+        return "//table[@class='contentpaneopen']//p//node()";
     }
 
 }

@@ -5,6 +5,7 @@ import static org.testng.Assert.assertNotNull;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
+import java.util.ArrayList;
 import java.util.List;
 
 import org.testng.annotations.AfterClass;
@@ -35,9 +36,9 @@ public class PeperoneMenuProviderTest {
 
     private MenuConfiguration createMenuConfiguration(String menuPage) {
         return new MenuConfiguration("http://localhost:18723/", menuPage);
-      //   return new MenuConfiguration("http://peperone.pl/", menuPage);
+        // return new MenuConfiguration("http://peperone.pl/", menuPage);
     }
-    
+
     @Test
     public void shouldParseMenudniaPage() throws MenuProviderException {
         // given
@@ -162,8 +163,8 @@ public class PeperoneMenuProviderTest {
         // then
         ensureMenuPositionsAreCorrect(menuPages, "Sałatki", salatyMenuPositions);
     }
-    
-    //@Test
+
+    @Test
     public void shouldParsePizzaPage() throws MenuProviderException {
 
         // given
@@ -247,10 +248,8 @@ public class PeperoneMenuProviderTest {
             new MenuPosition(4, "Sosy (czosnkowy, salsa, barbecue)", new BigDecimal("2.00"), "(1 szt.)") };
 
     private MenuPosition[] porkMenuPositions = new MenuPosition[] {
-            new MenuPosition(1, "Schab z lasu", new BigDecimal("19.00"),
-                    "Plastry schabu z sosem borowikowym, frytki, surówki."),
-            new MenuPosition(2, "Chrupiący schabowy", new BigDecimal("18.00"),
-                    "Kotlet schabowy panierowany, frytki, surówki."),
+            new MenuPosition(1, "Schab z lasu", new BigDecimal("19.00"), "Plastry schabu z sosem borowikowym, frytki, surówki."),
+            new MenuPosition(2, "Chrupiący schabowy", new BigDecimal("18.00"), "Kotlet schabowy panierowany, frytki, surówki."),
             new MenuPosition(3, "Mix Grill", new BigDecimal("26.00"),
                     "Dwa rodzaje mięsapodane z grillowanymi pieczarkami, frytki, surowki"),
             new MenuPosition(4, "Stek po chłopsku", new BigDecimal("19.00"),
@@ -267,23 +266,84 @@ public class PeperoneMenuProviderTest {
                     "Mixsałat, oliwki, wędzony łosoś, ser lazur, pomidorki koktajlowe, sos czosnkowy"),
             new MenuPosition(5, "Cezar", new BigDecimal("18.00"),
                     "Mixsałat,pomidor,ogórek,grillowanyboczekikurczak,parmezan,sosrosemary"), };
-    
+
     private MenuPosition[] menudniaMenuPositions = new MenuPosition[] {
             new MenuPosition(0, "Chłodnik z cukinii", new BigDecimal("3.00"), null),
             new MenuPosition(1, "Pierś drobiowa z szpinakiem zawijana szynką włoską, surówki", new BigDecimal("13.99"), null),
             new MenuPosition(2, "Tagliatelle z kurczakiem, brokułami, czosnkiem w sosie serowym", new BigDecimal("13.99"), null),
             new MenuPosition(3, "Paski schabu z sosem tzatziki, surówki", new BigDecimal("13.99"), null),
-            new MenuPosition(4, "Grillowany filet z kurczaka z białą mozzarellą i sosem pesto , surówki", new BigDecimal("13.99"), null),
-            new MenuPosition(5, "Pizza ”Siena” 30cm: sos pomidorowy, szynka, kukurydza, pomidor, cebula, mozzarella", new BigDecimal("13.99"), null),
-            new MenuPosition(6, "Pizza ”Baca” 30cm: sos pomidorowy, pieczarki, boczek, ser wędzony, ogórek, mozzarella", new BigDecimal("13.99"), null),
-            new MenuPosition(7, "Sałatka „Szefa”: mix sałat, pomidor, ogórek, grillowany kurczak, Camembert, winogrona, sos", new BigDecimal("13.99"), null) };
+            new MenuPosition(4, "Grillowany filet z kurczaka z białą mozzarellą i sosem pesto , surówki",
+                    new BigDecimal("13.99"), null),
+            new MenuPosition(5, "Pizza ”Siena” 30cm: sos pomidorowy, szynka, kukurydza, pomidor, cebula, mozzarella",
+                    new BigDecimal("13.99"), null),
+            new MenuPosition(6, "Pizza ”Baca” 30cm: sos pomidorowy, pieczarki, boczek, ser wędzony, ogórek, mozzarella",
+                    new BigDecimal("13.99"), null),
+            new MenuPosition(7, "Sałatka „Szefa”: mix sałat, pomidor, ogórek, grillowany kurczak, Camembert, winogrona, sos",
+                    new BigDecimal("13.99"), null) };
 
-    private MenuPosition[] pizzaMenuPositions = new MenuPosition[] {
-            new MenuPosition(1, "Grecka", new BigDecimal("16.00"),
-                    "Mixsałat,pomidor,ogórek,czerwonacebula,oliwki,serfeta,oliwa,sosvinegret"),
-            new MenuPosition(5, "Cezar", new BigDecimal("18.00"),
-                    "Mixsałat,pomidor,ogórek,grillowanyboczekikurczak,parmezan,sosrosemary"), };
-    
+    private MenuPosition[] pizzaMenuPositions = new PizzaListBuilder() //
+            .addPizza(1, "Margarita", "14.00", "21.00", "30.00", "38.00", "Sos pomidorowy, ser, oregano") //
+            .addPizza(2, "Funghi", "15.00", "22.00", "31.00", "39.00", "Sos pomidorowy, ser, pieczarki, oregano") //
+            .addPizza(3, "Vesuvio", "16.00", "23.00", "32.00", "40.00", "Sos pomidorowy, ser, pieczarki, szynka, oregano") //
+            .addPizza(4, "Tuna", "16.00", "23.00", "32.00", "40.00", "Sos pomidorowy, ser, cebula, tuńczyk, oregano") //
+            .addPizza(5, "Salami", "17.00", "23.00", "32.00", "42.00", "Sos pomidorowy, ser, pieczarki, salami, oregano") //
+            .addPizza(6, "Bianco", "17.00", "24.00", "33.00", "42.00",
+                    "Sos śmietanowo-czosnkowy, ser, szynka, brokuły, kukurydza,  oregano") //
+            .addPizza(7, "Toscana", "17.00", "25.00", "34.00", "42.00", "Sos pomidorowy, ser, salami, rukola, pomidor, oregano") //
+            .addPizza(8, "Wegetariańska", "17.00", "25.00", "34.00", "43.00",
+                    "Sos pomidorowy, ser, pieczarki,kukurydza, cebula, brokuły, papryka, oliwki, pomidor, oregano") //
+            .addPizza(9, "Capricciossa", "17.00", "25.00", "34.00", "44.00",
+                    "Sos pomidorowy, ser, pieczarki, szynka, kukurydza, papryka, oregano") //
+            .addPizza(10, "Hawajska", "17.00", "25.00", "34.00", "44.00", "Sos pomidorowy, ser,szynka, ananas, oregano") //
+            .addPizza(11, "Amore", "17.00", "25.00", "34.00", "44.00",
+                    "Sos pomidorowy, ser, pieczarki, kurczak, szynka, oliwki, oregano") //
+            .addPizza(12, "Sycylijska", "18.00", "26.00", "35.00", "45.00",
+                    "Sos pomidorowy, ser, pieczarki, salami, tuńczyk, kukurydza, pomidor, oliwki, oregano") //
+            .addPizza(13, "Królewska", "20.00", "28.00", "37.00", "45.00",
+                    "Sos śmietanowo-czosnkowy, ser, parmezan, marynowane kawałki kurczaka, szynka, oliwki, pomidor") //
+            .addPizza(14, "Pepperoni", "18.00", "26.00", "35.00", "45.00",
+                    "Sos pomidorowy, ser, pieczarki, salami pepperoni, papryka pepperoni, oregano") //
+            .addPizza(15, "Frutti di Mare", "18.00", "26.00", "35.00", "45.00",
+                    "Sos pomidorowy, pieczarki, owoce morza, papryka, oregano") //
+            .addPizza(16, "Los Qurczakos", "18.00", "26.00", "35.00", "45.00",
+                    "Sos pomidorowy, ser, pieczarki, kurczak, szynka, kukurydza, oregano") //
+            .addPizza(17, "Marysieńka", "18.00", "26.00", "35.00", "45.00",
+                    "Sos pomidorowy, ser, pieczarki, szynka, salami, papryka, cebula, oregano") //
+            .addPizza(18, "Rimini", "19.00", "26.00", "35.00", "43.00",
+                    "Sos pomidorowy, ser, pieczarki, szynka, jajko, salami, boczek, cebula, oregano") //
+            .addPizza(19, "Diabelska", "19.00", "26.00", "35.00", "45.00",
+                    "Sos pomidorowy, ser, pieczarki, szynka, salami, boczek, cebula,papryka jalapeno, tabasco, oregano") //
+            .addPizza(20, "Karola", "19.00", "26.00", "35.00", "45.00",
+                    "Sos pomidorowy, ser, pieczarki, szynka, kurczak, ananas, oregano") //
+            .addPizza(21, "Peperone", "20.00", "27.00", "36.00", "45.00",
+                    "Sos pomidorowy, mozzarella, salami peppreoni, oliwki, papryka pepperoni, pikantny filet z kurczaka") //
+            .addPizza(22, "Quattro Formaggi", "20.00", "27.00", "36.00", "45.00",
+                    "Sos pomidorowy, 4 rodzaje sera: mozzarella, feta, ser wędzony, parmezan, oregano") //
+            .addPizza(23, "Swojska", "20.00", "27.00", "36.00", "46.00",
+                    "Sos pomidorowy, podwójny ser, pieczarki, szynka, kiełbasa, salami, boczek, ogórek, oregano") //
+            .addPizza(24, "India", "19.00", "27.00", "36.00", "46.00",
+                    "Sos curry, ser, szynka, kukurydza, kurczak, brokuły, ogórek, cebula, oregano") //
+            .addPizza(25, "Kamikadze", "21.00", "28.00", "37.00", "47.00",
+                    "Sos pomidorowy, pieczarki, kurczak, bekon, szynka, sos chilli, papryka pepperoni, oregano") //
+            .addPizza(26, "Pizza Maxx", "21.00", "28.00", "37.00", "47.00",
+                    "Sos pomidorowy, podwójny ser, pieczarki, szynka, kiełbasa, salami, boczek, kukurydza, papryka, oregano") //
+            .addPizza(27, "Kompozycja własna", "22.00", "30.00", "39.00", "49.00", "8 dowolnych skłądników") //
+            .addPizza(28, "Italiana", "18.00", "26.00", "35.00", "45.00",
+                    "Sos pomidorowy, ser parmezan, mozarella, salami, boczek, cebula, pomidor, czosnek, oregano") //
+            .addPizza(29, "Dragon", "21.00", "28.00", "37.00", "45.00",
+                    "Sos pomidorowy, ser, pieczarki, szynka,salami, oliwki, kurcak, cebula, papryka jalapeno, sos chilli, oregano") //
+            .addPizza(30, "Zemsta kucharza", "19.00", "26.00", "35.00", "45.00",
+                    "Sos pomidorowy, ser, pieczarki, salami, boczek, pepperoni, cebula, tabasco") //
+            .addPizza(31, "Gangsterska", "18.00", "26.00", "35.00", "45.00",
+                    "Sos pomidorowy, ser, pieczarki, kiełbasa, bekon, ogórek, papryka, cebula, czosnek, oregano") //
+            .addPizza(32, "Kebab Pizza", "21.00", "28.00", "37.00", "46.00",
+                    "Sos pomidorowy, ser, kawałki kurczaka, cebula, ogórek świeży, pomidor, kapusta pekińska") //
+            .addPizza(33, "Parma", "23.00", "30.00", "39.00", "49.00",
+                    "Sos pomidorowy, cieńkie ciasto, szynka parmeńska, rukola, parmezan, oregano") //
+            .addPizza(34, "Specjale", "21.00", "29.00", "38.00", "48.00",
+                    "Sos pomidorowy, mozzarella, lazur pleśniowy, marynowane kawałki kurczaka, szynka, szpinak, rukola i czosnek") //
+            .toMenuPositionArray();
+
     private void ensureMenuPositionsAreCorrect(List<MenuPage> menuPages, String expectedCategoryName,
             MenuPosition[] expectedMenuPositions) {
         assertNotNull(menuPages);
@@ -295,4 +355,21 @@ public class PeperoneMenuProviderTest {
         assertEquals(page.getMenuPositions().toArray(), expectedMenuPositions);
     }
 
+    private class PizzaListBuilder {
+
+        private List<MenuPosition> list = new ArrayList<MenuPosition>();
+
+        private PizzaListBuilder addPizza(int id, String name, String price30, String price40, String price50, String price60,
+                String desc) {
+            list.add(new MenuPosition(id, name, "Ø30", new BigDecimal(price30), desc));
+            list.add(new MenuPosition(id, name, "Ø40", new BigDecimal(price40), desc));
+            list.add(new MenuPosition(id, name, "Ø50", new BigDecimal(price50), desc));
+            list.add(new MenuPosition(id, name, "Ø60", new BigDecimal(price60), desc));
+            return this;
+        }
+
+        private MenuPosition[] toMenuPositionArray() {
+            return list.toArray(new MenuPosition[0]);
+        }
+    }
 }
