@@ -1,8 +1,8 @@
 package com.grexdev.pimabank.menuprovider.parser;
 
 /**
- * CharSequence that noticed thread interrupts as might be necessary to recover 
- * from a loose regex on unexpected challenging input.
+ * CharSequence that noticed thread interrupts as might be necessary to recover from a loose regex on unexpected challenging
+ * input.
  */
 public class InterruptibleCharSequence implements CharSequence {
 
@@ -32,5 +32,3 @@ public class InterruptibleCharSequence implements CharSequence {
         return inner.toString();
     }
 }
-
-//Boolean result = myMatchingTask().get(2, TimeUnit.SECONDS)

@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeoutException;
 
 import javax.xml.xpath.XPathExpressionException;
 
@@ -65,11 +67,15 @@ public class PeperoneMenuProvider implements MenuProvider {
             String document = templator.createDocumentUsingTemplate(menuPageMetadata.getVelocityTemplateResource(), rootGroup);
             return dtoInstantiator.convertXmlToMenuListDto(document);
 
-        } catch (IOException | XPathExpressionException | SAXException | ConfigurationException e) {
+        } catch (IOException | XPathExpressionException | SAXException | ConfigurationException | InterruptedException | ExecutionException e) {
             throw new MenuProviderException(
                     "Wrong configuration or downloading / fetching / parsing failed / page structure has changed", e);
         } catch (RuntimeException e) {
-            throw new MenuProviderException("Unexprected runtime exception during fetching/parsing restaurant menu", e);
+            throw new MenuProviderException("Unexprected runtime exception during fetching/parsing restaurant menu", e);    
+            
+        } catch (TimeoutException e) {
+           throw new MenuProviderException("Timeout during matching regexp expression (Regexp definitions in " 
+                   + menuPageMetadata.getParserRegexpResource() + " are invalid or page content has changed recently", e);
         }
     }
 

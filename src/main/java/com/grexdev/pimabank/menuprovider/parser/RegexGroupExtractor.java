@@ -4,6 +4,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Callable;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -19,10 +26,25 @@ public class RegexGroupExtractor {
  
     private final NamedGroupRegistry registry;
     
-    public Object extractRegexGroupsValues(String content) {
+    private ExecutorService extractorThreadPool = Executors.newSingleThreadScheduledExecutor();
+    
+    public Object extractRegexGroupsValues(final String content) throws InterruptedException, ExecutionException, TimeoutException {
         log.debug("Extracting regexp groups from content >>>{}<<<", content);
-        Object rootGroupValue = processGroup(registry.getRootGroupDetails(), content);
+    
+        // Extracting regexp group is executed in separate thread to allow timeouting this searching if it takes too much time.
+        // (string in which we're searching regexp groups is wrapped with InterruptableCharSequence and working thread may be interruprted by Thread.interrupt() method invoked implicitly from Future object
+        
+        Callable<Object> task = new Callable<Object>() {
+            @Override
+            public Object call() throws Exception {
+                return processGroup(registry.getRootGroupDetails(), content);
+            }
+        };
+        
+        Future<Object> regexpExtractingTask = extractorThreadPool.submit(task);
+        Object rootGroupValue = regexpExtractingTask.get(5, TimeUnit.SECONDS);
         log.debug("Root group value >>>{}<<<", rootGroupValue);
+
         return rootGroupValue;
     }
 
@@ -69,7 +91,7 @@ public class RegexGroupExtractor {
     private Matcher getMatcher(GroupDetails parentGroupDetails, String content) {
         String regexp = registry.getRegexByGroupName(parentGroupDetails.getGroupName());
         Pattern pattern = Pattern.compile(regexp, Pattern.DOTALL | Pattern.MULTILINE);
-        return pattern.matcher(content);
+        return pattern.matcher(new InterruptibleCharSequence(content));
     }
 
 }
