@@ -43,13 +43,18 @@ public class PeperoneMenuProvider implements MenuProvider {
         List<MenuPage> menuPages = new ArrayList<MenuPage>();
 
         for (MenuPageMetadata menuPageMetadata : MenuPageMetadata.values()) {
-            if (configuration.getPageName() == null || configuration.getPageName().equals(menuPageMetadata.getPageName())) {
+            if (shouldMenuPageBeParsed(configuration, menuPageMetadata)) {
                 log.info("Fetching / parsing menu for page {}", menuPageMetadata);
                 menuPages.add(fetchRestaurantMenuPage(configuration.getRestaurantPageBaseUrl(), menuPageMetadata));
             }
         }
 
         return menuPages;
+    }
+    
+    private boolean shouldMenuPageBeParsed(MenuConfiguration configuration, MenuPageMetadata menuPageMetadata) {
+        return configuration.getPageName() == null && menuPageMetadata.isPageDisabled() == false
+                || configuration.getPageName() != null && configuration.getPageName().equals(menuPageMetadata.getPageName());
     }
 
     private MenuPage fetchRestaurantMenuPage(String restaurantPageBaseUrl, MenuPageMetadata menuPageMetadata) throws MenuProviderException {

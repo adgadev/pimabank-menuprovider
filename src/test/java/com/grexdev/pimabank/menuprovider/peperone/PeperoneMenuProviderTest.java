@@ -1,10 +1,9 @@
-package com.grexdev.pimabank.menuprovider;
+package com.grexdev.pimabank.menuprovider.peperone;
 
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +11,7 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
+import com.grexdev.pimabank.menuprovider.MenuConfiguration;
 import com.grexdev.pimabank.menuprovider.dto.MenuPage;
 import com.grexdev.pimabank.menuprovider.dto.MenuPosition;
 import com.grexdev.pimabank.menuprovider.exception.MenuProviderException;
@@ -268,18 +268,18 @@ public class PeperoneMenuProviderTest {
                     "Mixsałat,pomidor,ogórek,grillowanyboczekikurczak,parmezan,sosrosemary"), };
 
     private MenuPosition[] menudniaMenuPositions = new MenuPosition[] {
-            new MenuPosition(0, "Chłodnik z cukinii", new BigDecimal("3.00"), null),
-            new MenuPosition(1, "Pierś drobiowa z szpinakiem zawijana szynką włoską, surówki", new BigDecimal("13.99"), null),
-            new MenuPosition(2, "Tagliatelle z kurczakiem, brokułami, czosnkiem w sosie serowym", new BigDecimal("13.99"), null),
-            new MenuPosition(3, "Paski schabu z sosem tzatziki, surówki", new BigDecimal("13.99"), null),
+            new MenuPosition(0, "Chłodnik z cukinii", "Zupa", new BigDecimal("3.00"), null),
+            new MenuPosition(1, "Pierś drobiowa z szpinakiem zawijana szynką włoską, surówki", "Danie", new BigDecimal("13.99"), null),
+            new MenuPosition(2, "Tagliatelle z kurczakiem, brokułami, czosnkiem w sosie serowym", "Danie", new BigDecimal("13.99"), null),
+            new MenuPosition(3, "Paski schabu z sosem tzatziki, surówki", "Danie", new BigDecimal("13.99"), null),
             new MenuPosition(4, "Grillowany filet z kurczaka z białą mozzarellą i sosem pesto , surówki",
-                    new BigDecimal("13.99"), null),
+                    "Danie", new BigDecimal("13.99"), null),
             new MenuPosition(5, "Pizza ”Siena” 30cm: sos pomidorowy, szynka, kukurydza, pomidor, cebula, mozzarella",
-                    new BigDecimal("13.99"), null),
+                    "Danie", new BigDecimal("13.99"), null),
             new MenuPosition(6, "Pizza ”Baca” 30cm: sos pomidorowy, pieczarki, boczek, ser wędzony, ogórek, mozzarella",
-                    new BigDecimal("13.99"), null),
+                    "Danie", new BigDecimal("13.99"), null),
             new MenuPosition(7, "Sałatka „Szefa”: mix sałat, pomidor, ogórek, grillowany kurczak, Camembert, winogrona, sos",
-                    new BigDecimal("13.99"), null) };
+                    "Danie", new BigDecimal("13.99"), null) };
 
     private MenuPosition[] pizzaMenuPositions = new PizzaListBuilder() //
             .addPizza(1, "Margarita", "14.00", "21.00", "30.00", "38.00", "Sos pomidorowy, ser, oregano") //

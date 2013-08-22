@@ -1,4 +1,4 @@
-package com.grexdev.pimabank.menuprovider;
+package com.grexdev.pimabank.menuprovider.peperone;
 
 import java.io.IOException;
 import java.io.InputStream;
