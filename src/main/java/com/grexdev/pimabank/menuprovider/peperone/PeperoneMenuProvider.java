@@ -10,12 +10,12 @@ import java.util.concurrent.TimeoutException;
 
 import javax.xml.xpath.XPathExpressionException;
 
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.configuration.ConfigurationException;
 import org.xml.sax.SAXException;
 
-import com.grexdev.pimabank.menuprovider.MenuConfiguration;
 import com.grexdev.pimabank.menuprovider.MenuProvider;
 import com.grexdev.pimabank.menuprovider.dto.MenuPage;
 import com.grexdev.pimabank.menuprovider.exception.MenuProviderException;
@@ -28,7 +28,10 @@ import com.grexdev.pimabank.menuprovider.parser.utils.HttpWebPageFetcher;
 import com.grexdev.pimabank.menuprovider.parser.utils.VelocityXmlTemplator;
 
 @Slf4j
+@RequiredArgsConstructor
 public class PeperoneMenuProvider implements MenuProvider {
+    
+    private final MenuProviderConfiguration configuration;
 
     private HttpWebPageFetcher httpPageDownloader = new HttpWebPageFetcher();
 
@@ -39,7 +42,7 @@ public class PeperoneMenuProvider implements MenuProvider {
     private DigesterDtoInstantiator dtoInstantiator = new DigesterDtoInstantiator();
 
     @Override
-    public List<MenuPage> fetchRestaurantMenu(MenuConfiguration configuration) throws MenuProviderException {
+    public List<MenuPage> fetchRestaurantMenu() throws MenuProviderException {
         List<MenuPage> menuPages = new ArrayList<MenuPage>();
 
         for (MenuPageMetadata menuPageMetadata : MenuPageMetadata.values()) {
@@ -52,7 +55,7 @@ public class PeperoneMenuProvider implements MenuProvider {
         return menuPages;
     }
     
-    private boolean shouldMenuPageBeParsed(MenuConfiguration configuration, MenuPageMetadata menuPageMetadata) {
+    private boolean shouldMenuPageBeParsed(MenuProviderConfiguration configuration, MenuPageMetadata menuPageMetadata) {
         return configuration.getPageName() == null && menuPageMetadata.isPageDisabled() == false
                 || configuration.getPageName() != null && configuration.getPageName().equals(menuPageMetadata.getPageName());
     }

@@ -11,7 +11,6 @@ import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
-import com.grexdev.pimabank.menuprovider.MenuConfiguration;
 import com.grexdev.pimabank.menuprovider.dto.MenuPage;
 import com.grexdev.pimabank.menuprovider.dto.MenuPosition;
 import com.grexdev.pimabank.menuprovider.exception.MenuProviderException;
@@ -34,19 +33,19 @@ public class PeperoneMenuProviderTest {
         server.stopServer();
     }
 
-    private MenuConfiguration createMenuConfiguration(String menuPage) {
-        return new MenuConfiguration("http://localhost:18723/", menuPage);
+    private MenuProviderConfiguration createMenuConfiguration(String menuPage) {
+        return new MenuProviderConfiguration("http://localhost:18723/", menuPage);
      //    return new MenuConfiguration("http://peperone.pl/", menuPage);
     }
 
     @Test
     public void shouldParseMenudniaPage() throws MenuProviderException {
         // given
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider();
-        MenuConfiguration menuConfiguration = createMenuConfiguration(MenuPageMetadata.MENUDNIA.getPageName());
+        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.MENUDNIA.getPageName());
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
 
         // when
-        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu(menuConfiguration);
+        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
 
         // then
         ensureMenuPositionsAreCorrect(menuPages, "Danie dnia", menudniaMenuPositions);
@@ -56,11 +55,11 @@ public class PeperoneMenuProviderTest {
     public void shouldParseCalzonePage() throws MenuProviderException {
 
         // given
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider();
-        MenuConfiguration menuConfiguration = createMenuConfiguration(MenuPageMetadata.CALZONE.getPageName());
+        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.CALZONE.getPageName());
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
 
         // when
-        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu(menuConfiguration);
+        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
 
         // then
         ensureMenuPositionsAreCorrect(menuPages, "Calzone", calzoneMenuPositions);
@@ -70,11 +69,11 @@ public class PeperoneMenuProviderTest {
     public void shouldParseDlaDzieciPage() throws MenuProviderException {
 
         // given
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider();
-        MenuConfiguration menuConfiguration = createMenuConfiguration(MenuPageMetadata.DLADZIECI.getPageName());
+        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.DLADZIECI.getPageName());
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
 
         // when
-        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu(menuConfiguration);
+        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
 
         // then
         ensureMenuPositionsAreCorrect(menuPages, "Menu dla dzieci", dlaDzieciMenuPositions);
@@ -84,11 +83,11 @@ public class PeperoneMenuProviderTest {
     public void shouldParseMakaronyPage() throws MenuProviderException {
 
         // given
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider();
-        MenuConfiguration menuConfiguration = createMenuConfiguration(MenuPageMetadata.MAKARONY.getPageName());
+        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.MAKARONY.getPageName());
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
 
         // when
-        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu(menuConfiguration);
+        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
 
         // then
         ensureMenuPositionsAreCorrect(menuPages, "Makarony", makaronyMenuPositions);
@@ -98,11 +97,11 @@ public class PeperoneMenuProviderTest {
     public void shouldParseDrobirybyPage() throws MenuProviderException {
 
         // given
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider();
-        MenuConfiguration menuConfiguration = createMenuConfiguration(MenuPageMetadata.DROBIRYBY.getPageName());
+        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.DROBIRYBY.getPageName());
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
 
         // when
-        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu(menuConfiguration);
+        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
 
         // then
         ensureMenuPositionsAreCorrect(menuPages, "Drób i Ryby", drobirybyMenuPositions);
@@ -112,11 +111,11 @@ public class PeperoneMenuProviderTest {
     public void shouldParseNapojePage() throws MenuProviderException {
 
         // given
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider();
-        MenuConfiguration menuConfiguration = createMenuConfiguration(MenuPageMetadata.NAPOJE.getPageName());
+        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.NAPOJE.getPageName());
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
 
         // when
-        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu(menuConfiguration);
+        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
 
         // then
         ensureMenuPositionsAreCorrect(menuPages, "Napoje zimne", napojeMenuPositions);
@@ -126,11 +125,11 @@ public class PeperoneMenuProviderTest {
     public void shouldParseDodatkiPage() throws MenuProviderException {
 
         // given
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider();
-        MenuConfiguration menuConfiguration = createMenuConfiguration(MenuPageMetadata.DODATKI.getPageName());
+        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.DODATKI.getPageName());
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
 
         // when
-        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu(menuConfiguration);
+        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
 
         // then
         ensureMenuPositionsAreCorrect(menuPages, "Dodatki", dodatkiMenuPositions);
@@ -140,11 +139,11 @@ public class PeperoneMenuProviderTest {
     public void shouldParsePorkPage() throws MenuProviderException {
 
         // given
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider();
-        MenuConfiguration menuConfiguration = createMenuConfiguration(MenuPageMetadata.PORK.getPageName());
+        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.PORK.getPageName());
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
 
         // when
-        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu(menuConfiguration);
+        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
 
         // then
         ensureMenuPositionsAreCorrect(menuPages, "Dania z Wieprzowiny", porkMenuPositions);
@@ -154,11 +153,11 @@ public class PeperoneMenuProviderTest {
     public void shouldParseSalatyPage() throws MenuProviderException {
 
         // given
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider();
-        MenuConfiguration menuConfiguration = createMenuConfiguration(MenuPageMetadata.SALATY.getPageName());
+        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.SALATY.getPageName());
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
 
         // when
-        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu(menuConfiguration);
+        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
 
         // then
         ensureMenuPositionsAreCorrect(menuPages, "Sałatki", salatyMenuPositions);
@@ -168,11 +167,11 @@ public class PeperoneMenuProviderTest {
     public void shouldParsePizzaPage() throws MenuProviderException {
 
         // given
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider();
-        MenuConfiguration menuConfiguration = createMenuConfiguration(MenuPageMetadata.PIZZA.getPageName());
+        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.PIZZA.getPageName());
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
 
         // when
-        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu(menuConfiguration);
+        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
 
         // then
         ensureMenuPositionsAreCorrect(menuPages, "Pizza", pizzaMenuPositions);

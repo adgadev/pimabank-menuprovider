@@ -7,5 +7,5 @@ import com.grexdev.pimabank.menuprovider.exception.MenuProviderException;
 
 public interface MenuProvider {
     
-    List<MenuPage> fetchRestaurantMenu(MenuConfiguration configuration) throws MenuProviderException;
+    List<MenuPage> fetchRestaurantMenu() throws MenuProviderException;
 }

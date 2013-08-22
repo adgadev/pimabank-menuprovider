@@ -1,4 +1,4 @@
-package com.grexdev.pimabank.menuprovider;
+package com.grexdev.pimabank.menuprovider.peperone;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -7,7 +7,7 @@ import lombok.RequiredArgsConstructor;
 @Getter
 @RequiredArgsConstructor
 @AllArgsConstructor
-public class MenuConfiguration {
+public class MenuProviderConfiguration {
     
     private final String restaurantPageBaseUrl;
    

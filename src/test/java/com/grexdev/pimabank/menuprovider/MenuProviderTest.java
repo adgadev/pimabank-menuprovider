@@ -18,7 +18,7 @@ import com.grexdev.pimabank.menuprovider.exception.MenuProviderException;
  *       <dependency>
  *           <groupId>com.grexdev.pimabank</groupId>
  *           <artifactId>restaurants-menu-provider</artifactId>
- *           <version>0.2.0</version>
+ *           <version>0.2.1</version>
  *       </dependency>
  *   </dependencies>
  *   
@@ -41,11 +41,11 @@ public class MenuProviderTest {
     @Test(enabled = false)
     public void shouldGetPeperoneMenu() throws MenuProviderException {
 
-        MenuProviderFactory factory = new MenuProviderFactory();
+        MenuProviderFactoryConfiguration configuration = MenuProviderFactoryConfiguration.getDefaultConfiguration();
+        MenuProviderFactory factory = new MenuProviderFactory(configuration);
         MenuProvider peperoneMenuProvider = factory.createMenuProvider(Restaurant.PEPERONE);
 
-        MenuConfiguration configuration = new MenuConfiguration("http://peperone.pl/");
-        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu(configuration);
+        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
 
         printMenu(menuPages);
     }
