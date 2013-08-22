@@ -19,13 +19,13 @@ import com.grexdev.pimabank.menuprovider.MenuConfiguration;
 import com.grexdev.pimabank.menuprovider.MenuProvider;
 import com.grexdev.pimabank.menuprovider.dto.MenuPage;
 import com.grexdev.pimabank.menuprovider.exception.MenuProviderException;
-import com.grexdev.pimabank.menuprovider.parser.DigesterDtoInstantiator;
-import com.grexdev.pimabank.menuprovider.parser.HtmlPageTextContentExtractor;
-import com.grexdev.pimabank.menuprovider.parser.HttpWebPageFetcher;
-import com.grexdev.pimabank.menuprovider.parser.NamedGroupRegistry;
-import com.grexdev.pimabank.menuprovider.parser.RegexGroupExtractor;
-import com.grexdev.pimabank.menuprovider.parser.NamedGroupConfigurationProvider;
-import com.grexdev.pimabank.menuprovider.parser.VelocityXmlTemplator;
+import com.grexdev.pimabank.menuprovider.parser.regex.NamedGroupConfigurationProvider;
+import com.grexdev.pimabank.menuprovider.parser.regex.NamedGroupRegistry;
+import com.grexdev.pimabank.menuprovider.parser.regex.RegexGroupExtractor;
+import com.grexdev.pimabank.menuprovider.parser.utils.DigesterDtoInstantiator;
+import com.grexdev.pimabank.menuprovider.parser.utils.HtmlPageTextContentExtractor;
+import com.grexdev.pimabank.menuprovider.parser.utils.HttpWebPageFetcher;
+import com.grexdev.pimabank.menuprovider.parser.utils.VelocityXmlTemplator;
 
 @Slf4j
 public class PeperoneMenuProvider implements MenuProvider {

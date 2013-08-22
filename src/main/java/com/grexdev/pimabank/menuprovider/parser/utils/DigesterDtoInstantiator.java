@@ -1,10 +1,9 @@
-package com.grexdev.pimabank.menuprovider.parser;
+package com.grexdev.pimabank.menuprovider.parser.utils;
 
 import java.io.IOException;
 import java.io.Reader;
 import java.io.StringReader;
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 import org.apache.commons.beanutils.ConvertUtils;
 import org.apache.commons.beanutils.Converter;
@@ -38,10 +37,6 @@ public class DigesterDtoInstantiator {
                 String numberStr = value.toString().replace(',','.');
                 BigDecimal number = new BigDecimal(numberStr);
                 BigDecimal normalizedNumber = new BigDecimal(number.multiply(ONE_HUNDRED).toBigIntegerExact(), 2);
-                
-                
-                
-            //    number.setScale(-2, RoundingMode.CEILING);
                 return normalizedNumber;
             }};
         ConvertUtils.register(converter, BigDecimal.class);

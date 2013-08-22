@@ -1,4 +1,4 @@
-package com.grexdev.pimabank.menuprovider.parser;
+package com.grexdev.pimabank.menuprovider.parser.regex;
 
 import java.io.IOException;
 import java.io.InputStream;

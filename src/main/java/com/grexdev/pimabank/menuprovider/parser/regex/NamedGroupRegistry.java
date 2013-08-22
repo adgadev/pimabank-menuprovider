@@ -1,4 +1,4 @@
-package com.grexdev.pimabank.menuprovider.parser;
+package com.grexdev.pimabank.menuprovider.parser.regex;
 
 import java.util.ArrayList;
 import java.util.Collections;

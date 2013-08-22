@@ -1,4 +1,4 @@
-package com.grexdev.pimabank.menuprovider.parser;
+package com.grexdev.pimabank.menuprovider.parser.regex;
 
 /**
  * CharSequence that noticed thread interrupts as might be necessary to recover from a loose regex on unexpected challenging

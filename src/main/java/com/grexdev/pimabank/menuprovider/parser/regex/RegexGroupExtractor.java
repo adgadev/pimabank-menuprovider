@@ -1,4 +1,4 @@
-package com.grexdev.pimabank.menuprovider.parser;
+package com.grexdev.pimabank.menuprovider.parser.regex;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,8 +14,9 @@ import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.grexdev.pimabank.menuprovider.parser.NamedGroupRegistry.GroupDetails;
-import com.grexdev.pimabank.menuprovider.parser.NamedGroupRegistry.GroupType;
+import com.grexdev.pimabank.menuprovider.parser.regex.NamedGroupRegistry.GroupDetails;
+import com.grexdev.pimabank.menuprovider.parser.regex.NamedGroupRegistry.GroupType;
+
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,4 +1,4 @@
-package com.grexdev.pimabank.menuprovider.parser;
+package com.grexdev.pimabank.menuprovider.parser.utils;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
