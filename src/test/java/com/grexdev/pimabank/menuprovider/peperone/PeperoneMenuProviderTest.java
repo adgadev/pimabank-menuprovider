@@ -26,7 +26,7 @@ public class PeperoneMenuProviderTest {
 
     private HttpPageFromClasspathServer server = new HttpPageFromClasspathServer("peperone/peperone.pl-thursday");
 
-    private MenuProviderConfiguration configuration = new MenuProviderConfiguration();
+    private MenuProviderConfiguration configuration = MenuProviderConfiguration.getDefault();
     
     @BeforeClass
     public void setUp() throws IOException {

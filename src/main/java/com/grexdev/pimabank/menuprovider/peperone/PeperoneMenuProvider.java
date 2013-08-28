@@ -10,7 +10,6 @@ import java.util.concurrent.TimeoutException;
 
 import javax.xml.xpath.XPathExpressionException;
 
-import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
 import org.apache.commons.configuration.ConfigurationException;
@@ -30,14 +29,13 @@ import com.grexdev.pimabank.menuprovider.parser.utils.HttpWebPageFetcher;
 import com.grexdev.pimabank.menuprovider.parser.utils.VelocityXmlTemplator;
 
 @Slf4j
-@RequiredArgsConstructor
 public class PeperoneMenuProvider implements MenuProvider {
     
     private final MenuProviderConfiguration configuration;
     
     private final RestaurantDescriptor restaurantDescriptor;
 
-    private HttpWebPageFetcher httpPageDownloader = new HttpWebPageFetcher();
+    private final HttpWebPageFetcher httpPageDownloader;
 
     private NamedGroupConfigurationProvider regexpConfigurationProvider = new NamedGroupConfigurationProvider();
 
@@ -45,6 +43,12 @@ public class PeperoneMenuProvider implements MenuProvider {
 
     private DigesterDtoInstantiator dtoInstantiator = new DigesterDtoInstantiator();
 
+    public PeperoneMenuProvider(MenuProviderConfiguration configuration, RestaurantDescriptor restaurantDescriptor) {
+        this.configuration = configuration;
+        this.restaurantDescriptor = restaurantDescriptor;
+        httpPageDownloader =  new HttpWebPageFetcher(configuration);
+    }
+    
     @Override
     public List<MenuPage> fetchRestaurantMenu() throws MenuProviderException {
         List<MenuPage> menuPages = new ArrayList<MenuPage>();
@@ -68,7 +72,7 @@ public class PeperoneMenuProvider implements MenuProvider {
             String text = htmlToTextTransformer.extractTextContent(inputStream, menuPageDescriptor.getXPathExpression());
 
             Map<String, String> namedRegexpGroups = regexpConfigurationProvider.getNamedRegexpGroups(menuPageDescriptor.getParserRegexpResource());
-            RegexGroupExtractor regexGroupExtractor = new RegexGroupExtractor(new NamedGroupRegistry(namedRegexpGroups));
+            RegexGroupExtractor regexGroupExtractor = new RegexGroupExtractor(configuration, new NamedGroupRegistry(namedRegexpGroups));
             Object rootGroup = regexGroupExtractor.extractRegexGroupsValues(text);
 
             String document = templator.createDocumentUsingTemplate(menuPageDescriptor.getVelocityTemplateResource(), rootGroup);

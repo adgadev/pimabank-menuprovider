@@ -18,7 +18,7 @@ import com.grexdev.pimabank.menuprovider.exception.MenuProviderException;
  *       <dependency>
  *           <groupId>com.grexdev.pimabank</groupId>
  *           <artifactId>restaurants-menu-provider</artifactId>
- *           <version>0.2.1</version>
+ *           <version>0.2.2</version>
  *       </dependency>
  *   </dependencies>
  *   

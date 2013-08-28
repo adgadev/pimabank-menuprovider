@@ -16,6 +16,7 @@ import java.util.regex.Pattern;
 
 import com.grexdev.pimabank.menuprovider.parser.regex.NamedGroupRegistry.GroupDetails;
 import com.grexdev.pimabank.menuprovider.parser.regex.NamedGroupRegistry.GroupType;
+import com.grexdev.pimabank.menuprovider.peperone.MenuProviderConfiguration;
 
 
 import lombok.RequiredArgsConstructor;
@@ -24,7 +25,9 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 public class RegexGroupExtractor {
- 
+
+    private final MenuProviderConfiguration configuration;
+    
     private final NamedGroupRegistry registry;
     
     private ExecutorService extractorThreadPool = Executors.newSingleThreadScheduledExecutor();
@@ -43,7 +46,7 @@ public class RegexGroupExtractor {
         };
         
         Future<Object> regexpExtractingTask = extractorThreadPool.submit(task);
-        Object rootGroupValue = regexpExtractingTask.get(5, TimeUnit.SECONDS);
+        Object rootGroupValue = regexpExtractingTask.get(configuration.getRegexpMatcherTimeout(), TimeUnit.MILLISECONDS);
         log.debug("Root group value >>>{}<<<", rootGroupValue);
 
         return rootGroupValue;

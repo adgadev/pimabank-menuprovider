@@ -7,15 +7,22 @@ import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import lombok.RequiredArgsConstructor;
+
 import org.apache.commons.io.IOUtils;
 
+import com.grexdev.pimabank.menuprovider.peperone.MenuProviderConfiguration;
+
+@RequiredArgsConstructor
 public class HttpWebPageFetcher {
+    
+    private final MenuProviderConfiguration configuration;
 
     public InputStream downloadPage(String urlAddress) throws IOException {
         URL url = new URL(urlAddress);
         HttpURLConnection connection = (HttpURLConnection) url.openConnection();
-        connection.setReadTimeout(15000);
-        connection.setConnectTimeout(15000);
+        connection.setReadTimeout(configuration.getHttpFetcherReadTimeout());
+        connection.setConnectTimeout(configuration.getHttpFetcherConnectionTimeout());
 
         InputStream inputStream = null;
         ByteArrayOutputStream outputStream = null;
