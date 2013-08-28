@@ -5,15 +5,10 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 @Getter
-@RequiredArgsConstructor
-@AllArgsConstructor
+//@RequiredArgsConstructor
+//@AllArgsConstructor
 public class MenuProviderConfiguration {
-    
-    private final String restaurantPageBaseUrl;
-   
-    /**
-     * pageName is mainly for testing
-     */
-    private String pageName;
+
+    // TODO: add timeout parameters etc
     
 }

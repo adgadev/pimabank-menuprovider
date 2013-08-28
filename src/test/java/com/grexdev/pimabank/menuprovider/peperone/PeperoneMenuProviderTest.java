@@ -5,6 +5,7 @@ import static org.testng.Assert.assertNotNull;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.testng.annotations.AfterClass;
@@ -14,7 +15,9 @@ import org.testng.annotations.Test;
 import com.grexdev.pimabank.menuprovider.dto.MenuPage;
 import com.grexdev.pimabank.menuprovider.dto.MenuPosition;
 import com.grexdev.pimabank.menuprovider.exception.MenuProviderException;
-import com.grexdev.pimabank.menuprovider.peperone.MenuPageMetadata;
+import com.grexdev.pimabank.menuprovider.parser.descriptor.MenuPageDescriptor;
+import com.grexdev.pimabank.menuprovider.parser.descriptor.RestaurantDescriptor;
+import com.grexdev.pimabank.menuprovider.parser.descriptor.RestaurantDescriptorProvider;
 import com.grexdev.pimabank.menuprovider.peperone.PeperoneMenuProvider;
 
 public class PeperoneMenuProviderTest {
@@ -23,6 +26,8 @@ public class PeperoneMenuProviderTest {
 
     private HttpPageFromClasspathServer server = new HttpPageFromClasspathServer("peperone/peperone.pl-thursday");
 
+    private MenuProviderConfiguration configuration = new MenuProviderConfiguration();
+    
     @BeforeClass
     public void setUp() throws IOException {
         server.startServer(SERVER_PORT);
@@ -32,17 +37,26 @@ public class PeperoneMenuProviderTest {
     public void tearDown() throws IOException {
         server.stopServer();
     }
-
-    private MenuProviderConfiguration createMenuConfiguration(String menuPage) {
-        return new MenuProviderConfiguration("http://localhost:18723/", menuPage);
-     //    return new MenuConfiguration("http://peperone.pl/", menuPage);
+    
+    private RestaurantDescriptor createRestaurantDescriptor(String menuPage) throws MenuProviderException {
+        RestaurantDescriptor restaurantDescriptor = new RestaurantDescriptorProvider().getRestaurantDescriptor("peperone-descriptor.xml");
+        restaurantDescriptor.setBaseUrl(String.format("http://localhost:%s/", SERVER_PORT)); // without it uses real page
+        
+        // alter descriptor to use only one page, which matches given name
+        for (MenuPageDescriptor menuPageDescriptor : restaurantDescriptor.getMenuPages()) {
+            if (menuPageDescriptor.getPageName().equals(menuPage)) {
+                restaurantDescriptor.setMenuPages(Arrays.asList(menuPageDescriptor));
+                return restaurantDescriptor;
+            }
+        }
+        throw new RuntimeException("Page with given name not found in descriptor");
     }
 
     @Test
     public void shouldParseMenudniaPage() throws MenuProviderException {
         // given
-        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.MENUDNIA.getPageName());
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
+        RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("menudnia");
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -55,8 +69,8 @@ public class PeperoneMenuProviderTest {
     public void shouldParseCalzonePage() throws MenuProviderException {
 
         // given
-        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.CALZONE.getPageName());
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
+        RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("calzone");
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -69,8 +83,8 @@ public class PeperoneMenuProviderTest {
     public void shouldParseDlaDzieciPage() throws MenuProviderException {
 
         // given
-        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.DLADZIECI.getPageName());
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
+        RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("dladzieci");
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -83,8 +97,8 @@ public class PeperoneMenuProviderTest {
     public void shouldParseMakaronyPage() throws MenuProviderException {
 
         // given
-        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.MAKARONY.getPageName());
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
+        RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("makarony");
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -97,8 +111,8 @@ public class PeperoneMenuProviderTest {
     public void shouldParseDrobirybyPage() throws MenuProviderException {
 
         // given
-        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.DROBIRYBY.getPageName());
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
+        RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("drobiryby");
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -111,8 +125,8 @@ public class PeperoneMenuProviderTest {
     public void shouldParseNapojePage() throws MenuProviderException {
 
         // given
-        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.NAPOJE.getPageName());
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
+        RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("napoje");
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -125,8 +139,8 @@ public class PeperoneMenuProviderTest {
     public void shouldParseDodatkiPage() throws MenuProviderException {
 
         // given
-        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.DODATKI.getPageName());
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
+        RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("dodatki");
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -139,8 +153,8 @@ public class PeperoneMenuProviderTest {
     public void shouldParsePorkPage() throws MenuProviderException {
 
         // given
-        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.PORK.getPageName());
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
+        RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("pork");
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -153,8 +167,8 @@ public class PeperoneMenuProviderTest {
     public void shouldParseSalatyPage() throws MenuProviderException {
 
         // given
-        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.SALATY.getPageName());
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
+        RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("salaty");
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -167,8 +181,8 @@ public class PeperoneMenuProviderTest {
     public void shouldParsePizzaPage() throws MenuProviderException {
 
         // given
-        MenuProviderConfiguration configuration = createMenuConfiguration(MenuPageMetadata.PIZZA.getPageName());
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration);
+        RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("pizza");
+        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();

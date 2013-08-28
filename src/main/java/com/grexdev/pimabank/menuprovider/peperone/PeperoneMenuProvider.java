@@ -19,6 +19,8 @@ import org.xml.sax.SAXException;
 import com.grexdev.pimabank.menuprovider.MenuProvider;
 import com.grexdev.pimabank.menuprovider.dto.MenuPage;
 import com.grexdev.pimabank.menuprovider.exception.MenuProviderException;
+import com.grexdev.pimabank.menuprovider.parser.descriptor.MenuPageDescriptor;
+import com.grexdev.pimabank.menuprovider.parser.descriptor.RestaurantDescriptor;
 import com.grexdev.pimabank.menuprovider.parser.regex.NamedGroupConfigurationProvider;
 import com.grexdev.pimabank.menuprovider.parser.regex.NamedGroupRegistry;
 import com.grexdev.pimabank.menuprovider.parser.regex.RegexGroupExtractor;
@@ -32,6 +34,8 @@ import com.grexdev.pimabank.menuprovider.parser.utils.VelocityXmlTemplator;
 public class PeperoneMenuProvider implements MenuProvider {
     
     private final MenuProviderConfiguration configuration;
+    
+    private final RestaurantDescriptor restaurantDescriptor;
 
     private HttpWebPageFetcher httpPageDownloader = new HttpWebPageFetcher();
 
@@ -44,35 +48,30 @@ public class PeperoneMenuProvider implements MenuProvider {
     @Override
     public List<MenuPage> fetchRestaurantMenu() throws MenuProviderException {
         List<MenuPage> menuPages = new ArrayList<MenuPage>();
-
-        for (MenuPageMetadata menuPageMetadata : MenuPageMetadata.values()) {
-            if (shouldMenuPageBeParsed(configuration, menuPageMetadata)) {
-                log.info("Fetching / parsing menu for page {}", menuPageMetadata);
-                menuPages.add(fetchRestaurantMenuPage(configuration.getRestaurantPageBaseUrl(), menuPageMetadata));
+        
+        for (MenuPageDescriptor menuPageDescriptor : restaurantDescriptor.getMenuPages()) {
+            if (menuPageDescriptor.isPageDisabled() == false) {
+                log.info("Fetching / parsing menu for page {}", menuPageDescriptor);
+                menuPages.add(fetchRestaurantMenuPage(restaurantDescriptor.getBaseUrl(), menuPageDescriptor));
             }
         }
 
         return menuPages;
     }
     
-    private boolean shouldMenuPageBeParsed(MenuProviderConfiguration configuration, MenuPageMetadata menuPageMetadata) {
-        return configuration.getPageName() == null && menuPageMetadata.isPageDisabled() == false
-                || configuration.getPageName() != null && configuration.getPageName().equals(menuPageMetadata.getPageName());
-    }
-
-    private MenuPage fetchRestaurantMenuPage(String restaurantPageBaseUrl, MenuPageMetadata menuPageMetadata) throws MenuProviderException {
+    private MenuPage fetchRestaurantMenuPage(String restaurantPageBaseUrl, MenuPageDescriptor menuPageDescriptor) throws MenuProviderException {
         try {
-            String fullPageUrl = restaurantPageBaseUrl + menuPageMetadata.getUrlSuffix();
+            String fullPageUrl = restaurantPageBaseUrl + menuPageDescriptor.getUrlSuffix();
             InputStream inputStream = httpPageDownloader.downloadPage(fullPageUrl);
 
             HtmlPageTextContentExtractor htmlToTextTransformer = new HtmlPageTextContentExtractor();
-            String text = htmlToTextTransformer.extractTextContent(inputStream, menuPageMetadata.getXPathExpression());
+            String text = htmlToTextTransformer.extractTextContent(inputStream, menuPageDescriptor.getXPathExpression());
 
-            Map<String, String> namedRegexpGroups = regexpConfigurationProvider.getNamedRegexpGroups(menuPageMetadata.getParserRegexpResource());
+            Map<String, String> namedRegexpGroups = regexpConfigurationProvider.getNamedRegexpGroups(menuPageDescriptor.getParserRegexpResource());
             RegexGroupExtractor regexGroupExtractor = new RegexGroupExtractor(new NamedGroupRegistry(namedRegexpGroups));
             Object rootGroup = regexGroupExtractor.extractRegexGroupsValues(text);
 
-            String document = templator.createDocumentUsingTemplate(menuPageMetadata.getVelocityTemplateResource(), rootGroup);
+            String document = templator.createDocumentUsingTemplate(menuPageDescriptor.getVelocityTemplateResource(), rootGroup);
             return dtoInstantiator.convertXmlToMenuListDto(document);
 
         } catch (IOException | XPathExpressionException | SAXException | ConfigurationException | InterruptedException | ExecutionException e) {
@@ -83,7 +82,7 @@ public class PeperoneMenuProvider implements MenuProvider {
             
         } catch (TimeoutException e) {
            throw new MenuProviderException("Timeout during matching regexp expression (Regexp definitions in " 
-                   + menuPageMetadata.getParserRegexpResource() + " are invalid or page content has changed recently", e);
+                   + menuPageDescriptor.getParserRegexpResource() + " are invalid or page content has changed recently", e);
         }
     }
 
