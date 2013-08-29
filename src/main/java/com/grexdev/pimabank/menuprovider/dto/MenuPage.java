@@ -1,5 +1,6 @@
 package com.grexdev.pimabank.menuprovider.dto;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,7 +15,9 @@ import org.apache.commons.digester3.annotations.rules.SetNext;
 @Getter
 @ToString
 @ObjectCreate(pattern = "menu")
-public class MenuPage {
+public class MenuPage implements Serializable {
+
+    private static final long serialVersionUID = -4849805686338998410L;
 
     @Setter
     @BeanPropertySetter(pattern = "menu/category")

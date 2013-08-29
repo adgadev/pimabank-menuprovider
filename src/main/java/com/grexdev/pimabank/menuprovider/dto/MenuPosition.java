@@ -1,5 +1,6 @@
 package com.grexdev.pimabank.menuprovider.dto;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import lombok.AllArgsConstructor;
@@ -19,7 +20,9 @@ import org.apache.commons.digester3.annotations.rules.ObjectCreate;
 @ToString
 @EqualsAndHashCode
 @ObjectCreate(pattern = "menu/menupositions/menuposition")
-public class MenuPosition {
+public class MenuPosition implements Serializable {
+
+    private static final long serialVersionUID = 6324469075566839823L;
 
     @BeanPropertySetter(pattern = "menu/menupositions/menuposition/id")
     private int id;

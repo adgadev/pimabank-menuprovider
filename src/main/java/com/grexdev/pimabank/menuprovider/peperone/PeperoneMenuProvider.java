@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 import java.util.concurrent.TimeoutException;
 
 import javax.xml.xpath.XPathExpressionException;
@@ -52,18 +54,23 @@ public class PeperoneMenuProvider implements MenuProvider {
     @Override
     public List<MenuPage> fetchRestaurantMenu() throws MenuProviderException {
         List<MenuPage> menuPages = new ArrayList<MenuPage>();
+        ExecutorService extractorThreadPool = Executors.newSingleThreadScheduledExecutor();
         
-        for (MenuPageDescriptor menuPageDescriptor : restaurantDescriptor.getMenuPages()) {
-            if (menuPageDescriptor.isPageDisabled() == false) {
-                log.info("Fetching / parsing menu for page {}", menuPageDescriptor);
-                menuPages.add(fetchRestaurantMenuPage(restaurantDescriptor.getBaseUrl(), menuPageDescriptor));
+        try {
+            for (MenuPageDescriptor menuPageDescriptor : restaurantDescriptor.getMenuPages()) {
+                if (menuPageDescriptor.isPageDisabled() == false) {
+                    log.info("Fetching / parsing menu for page {}", menuPageDescriptor);
+                    menuPages.add(fetchRestaurantMenuPage(restaurantDescriptor.getBaseUrl(), menuPageDescriptor, extractorThreadPool));
+                }
             }
+        } finally {
+            extractorThreadPool.shutdown();
         }
 
         return menuPages;
     }
     
-    private MenuPage fetchRestaurantMenuPage(String restaurantPageBaseUrl, MenuPageDescriptor menuPageDescriptor) throws MenuProviderException {
+    private MenuPage fetchRestaurantMenuPage(String restaurantPageBaseUrl, MenuPageDescriptor menuPageDescriptor, ExecutorService extractorThreadPool) throws MenuProviderException {
         try {
             String fullPageUrl = restaurantPageBaseUrl + menuPageDescriptor.getUrlSuffix();
             InputStream inputStream = httpPageDownloader.downloadPage(fullPageUrl);
@@ -72,7 +79,7 @@ public class PeperoneMenuProvider implements MenuProvider {
             String text = htmlToTextTransformer.extractTextContent(inputStream, menuPageDescriptor.getXPathExpression());
 
             Map<String, String> namedRegexpGroups = regexpConfigurationProvider.getNamedRegexpGroups(menuPageDescriptor.getParserRegexpResource());
-            RegexGroupExtractor regexGroupExtractor = new RegexGroupExtractor(configuration, new NamedGroupRegistry(namedRegexpGroups));
+            RegexGroupExtractor regexGroupExtractor = new RegexGroupExtractor(configuration, new NamedGroupRegistry(namedRegexpGroups), extractorThreadPool);
             Object rootGroup = regexGroupExtractor.extractRegexGroupsValues(text);
 
             String document = templator.createDocumentUsingTemplate(menuPageDescriptor.getVelocityTemplateResource(), rootGroup);

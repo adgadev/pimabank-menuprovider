@@ -38,7 +38,7 @@ import com.grexdev.pimabank.menuprovider.exception.MenuProviderException;
 @Slf4j
 public class MenuProviderTest {
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     public void shouldGetPeperoneMenu() throws MenuProviderException {
 
         MenuProviderFactoryConfiguration configuration = MenuProviderFactoryConfiguration.getDefaultConfiguration();
