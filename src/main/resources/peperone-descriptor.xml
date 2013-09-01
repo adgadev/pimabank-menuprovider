@@ -4,7 +4,8 @@
 	<baseUrl>http://peperone.pl/</baseUrl>
 	<menuPages>
 		<menuPage>
-			<pageName>menudnia</pageName>
+			<pageId>menudnia</pageId>
+			<pageName>Menu dnia</pageName>
 			<urlSuffix></urlSuffix>
 			<xPathExpression>//table[@class='contentpaneopen']//span//node()</xPathExpression>
 			<parserRegexpResource>peperone/menudnia.regex</parserRegexpResource>
@@ -12,7 +13,8 @@
 			<pageDisabled>false</pageDisabled>
 		</menuPage>
 		<menuPage>
-			<pageName>calzone</pageName>
+			<pageId>calzone</pageId>
+			<pageName>Calzone</pageName>
 			<urlSuffix>calzone-menu</urlSuffix>
 			<xPathExpression>//table[@class='contentpaneopen']//span//node()</xPathExpression> 
 			<parserRegexpResource>peperone/generic.regex</parserRegexpResource>
@@ -20,7 +22,8 @@
 			<pageDisabled>false</pageDisabled>
 		</menuPage>
 		<menuPage>
-			<pageName>dladzieci</pageName>
+			<pageId>dladzieci</pageId>
+			<pageName>Dla dzieci</pageName>
 			<urlSuffix>dladzieci-menu-all</urlSuffix>
 			<xPathExpression>//table[@class='contentpaneopen']//span//node()</xPathExpression>
 			<parserRegexpResource>peperone/generic.regex</parserRegexpResource>
@@ -28,7 +31,8 @@
 			<pageDisabled>false</pageDisabled>
 		</menuPage>
 		<menuPage>
-			<pageName>drobiryby</pageName>
+			<pageId>drobiryby</pageId>
+			<pageName>Drób i ryby</pageName>
 			<urlSuffix>drobiryby-menu-all</urlSuffix>
 			<xPathExpression>//table[@class='contentpaneopen']//span//node()</xPathExpression>
 			<parserRegexpResource>peperone/generic.regex</parserRegexpResource>
@@ -36,7 +40,8 @@
 			<pageDisabled>false</pageDisabled>
 		</menuPage>
 		<menuPage>
-			<pageName>makarony</pageName>
+			<pageId>makarony</pageId>
+			<pageName>Makarony</pageName>
 			<urlSuffix>makarony-menu-all</urlSuffix>
 			<xPathExpression>//table[@class='contentpaneopen']//span//node()</xPathExpression>
 			<parserRegexpResource>peperone/generic.regex</parserRegexpResource>
@@ -44,7 +49,8 @@
 			<pageDisabled>false</pageDisabled>
 		</menuPage>
 		<menuPage>
-			<pageName>pork</pageName>
+			<pageId>pork</pageId>
+			<pageName>Dania z wieprzowiny</pageName>
 			<urlSuffix>pork-menu</urlSuffix>
 			<xPathExpression>//table[@class='contentpaneopen']//span//node()</xPathExpression>
 			<parserRegexpResource>peperone/generic.regex</parserRegexpResource>
@@ -52,7 +58,8 @@
 			<pageDisabled>false</pageDisabled>
 		</menuPage>
 		<menuPage>
-			<pageName>salaty</pageName>
+			<pageId>salaty</pageId>
+			<pageName>Sałaty</pageName>
 			<urlSuffix>salaty-menu-all</urlSuffix>
 			<xPathExpression>//table[@class='contentpaneopen']//span//node()</xPathExpression>
 			<parserRegexpResource>peperone/generic.regex</parserRegexpResource>
@@ -60,7 +67,8 @@
 			<pageDisabled>false</pageDisabled>
 		</menuPage>
 		<menuPage>
-			<pageName>pizza</pageName>
+			<pageId>pizza</pageId>
+			<pageName>Pizza</pageName>
 			<urlSuffix>pizza</urlSuffix>
 			<xPathExpression>//table[@class='contentpaneopen']//p//node()</xPathExpression>
 			<parserRegexpResource>peperone/pizza.regex</parserRegexpResource>
@@ -69,7 +77,8 @@
 		</menuPage>
 		<!-- TODO fix napoje parsing -->
 		<menuPage>
-			<pageName>napoje</pageName>
+			<pageId>napoje</pageId>
+			<pageName>Napoje</pageName>
 			<urlSuffix>napoje-menu-all</urlSuffix>
 			<xPathExpression>//table[@class='contentpaneopen']//span//node()</xPathExpression>
 			<parserRegexpResource>peperone/generic.regex</parserRegexpResource>
@@ -78,7 +87,8 @@
 		</menuPage>
 		<!-- TODO fix dodatki parsing -->
 		<menuPage>
-			<pageName>dodatki</pageName>
+			<pageId>dodatki</pageId>
+			<pageName>Dodatki</pageName>
 			<urlSuffix>dodatki-all</urlSuffix>
 			<xPathExpression>//table[@class='contentpaneopen']//span//node()</xPathExpression>
 			<parserRegexpResource>peperone/dodatki.regex</parserRegexpResource>

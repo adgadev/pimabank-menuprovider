@@ -17,7 +17,8 @@ public class MenuProviderFactory {
 
     @Getter
     public enum Restaurant implements RestaurantDescriptorLocation {
-        PEPERONE("peperone-descriptor.xml");
+        PEPERONE("peperone-descriptor.xml"),
+        PHUONG_DONG("phuong-dong-descriptor.xml");
         
         private String restaurantDescriptorLocation;
         

@@ -1,22 +1,5 @@
-############## unnamed groups, defined for simplicity ##########
 # Unnamed groups should have key preffixed with "TAG_" phrase !!
 # '\' char is escape character, so to produce '\' in the output '\\' must be used 
-
-TAG_SMALL_POLISH_LETTER = \\u0104\\u0106\\u0118\\u0141\\u0143\\u00D3\\u015A\\u0179\\u017B
-TAG_CAPITAL_POLISH_LETTER = \\u0105\\u0107\\u0119\\u0142\\u0144\\u00F3\\u015B\\u017A\\u017C
-TAG_LETTER = [\\p{Alpha}${TAG_SMALL_POLISH_LETTER}${TAG_CAPITAL_POLISH_LETTER}]
-
-# 13,99 or 13
-TAG_PRICE = \\d+(?:,\\d+)? 
-
-# a line of text starting with alphanumeric char 
-TAG_TEXT_LINE = ^${TAG_LETTER}.*?$
-
-# block of text starting from any letter to the nearest digit
-TAG_TEXT = ${TAG_LETTER}[^\\d]*
-
-# any string - reluctant, not greedy version
-TAG_ANY_STRING = .*? 
 
 ######################### NAMED REGEXP GROUPS #######################
 # Group names must not contain chars other than letters and digits !

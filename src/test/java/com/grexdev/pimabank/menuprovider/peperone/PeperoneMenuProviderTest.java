@@ -44,7 +44,7 @@ public class PeperoneMenuProviderTest {
         
         // alter descriptor to use only one page, which matches given name
         for (MenuPageDescriptor menuPageDescriptor : restaurantDescriptor.getMenuPages()) {
-            if (menuPageDescriptor.getPageName().equals(menuPage)) {
+            if (menuPageDescriptor.getPageId().equals(menuPage)) {
                 restaurantDescriptor.setMenuPages(Arrays.asList(menuPageDescriptor));
                 return restaurantDescriptor;
             }

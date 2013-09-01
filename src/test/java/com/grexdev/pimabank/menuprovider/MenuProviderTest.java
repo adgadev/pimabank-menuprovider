@@ -38,21 +38,37 @@ import com.grexdev.pimabank.menuprovider.exception.MenuProviderException;
 @Slf4j
 public class MenuProviderTest {
 
-    @Test(enabled = false)
+    @Test(groups = "endToEnd")
     public void shouldGetPeperoneMenu() throws MenuProviderException {
-
+        // given
         MenuProviderFactoryConfiguration configuration = MenuProviderFactoryConfiguration.getDefaultConfiguration();
         MenuProviderFactory factory = new MenuProviderFactory(configuration);
         MenuProvider peperoneMenuProvider = factory.createMenuProvider(Restaurant.PEPERONE);
 
+        // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
 
-        printMenu(menuPages);
+        // then
+        printMenu("PEPERONE",menuPages);
     }
     
-    
-    private void printMenu(List<MenuPage> menuPages) {
-        log.info("========================= PEPERONE MENU =======================\n");
+    @Test(groups = "endToEnd")
+    public void shouldGetPhoungDongMenu() throws MenuProviderException {
+
+        // given
+        MenuProviderFactoryConfiguration configuration = MenuProviderFactoryConfiguration.getDefaultConfiguration();
+        MenuProviderFactory factory = new MenuProviderFactory(configuration);
+        MenuProvider peperoneMenuProvider = factory.createMenuProvider(Restaurant.PHUONG_DONG);
+
+        // when
+        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
+
+        // then
+        printMenu("PHUONG DONG", menuPages);
+    }
+   
+    private void printMenu(String name, List<MenuPage> menuPages) {
+        log.info("========================= {} MENU =======================\n", name);
 
         for (MenuPage menuPage : menuPages) {
             log.info("############# Category = {} ##########", menuPage.getCategory());

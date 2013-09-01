@@ -16,12 +16,15 @@ public class NamedGroupConfigurationProvider {
     
     private static final String UNNAMED_GROUP_PREFFIX = "TAG_";
     
-    public Map<String, String> getNamedRegexpGroups(String resourceName) throws IOException, ConfigurationException {
-        try (InputStream inputStream = loadResourceFromClasspath(resourceName)) {
+    public Map<String, String> getNamedRegexpGroups(String commonsRegexResourceName, String regexResourceName) throws IOException, ConfigurationException {
+        try (InputStream commonsRegexInputStream = loadResourceFromClasspath(commonsRegexResourceName);
+             InputStream regexInputStream = loadResourceFromClasspath(regexResourceName)) {
+            
             PropertiesConfiguration.setDefaultListDelimiter(';');
             PropertiesConfiguration propertiesConfiguration = new PropertiesConfiguration();
-            propertiesConfiguration.load(inputStream, "UTF-8");
-                      
+            propertiesConfiguration.load(regexInputStream, "UTF-8");
+            propertiesConfiguration.load(commonsRegexInputStream, "UTF-8");
+            
             Iterator<String> keyIterator = propertiesConfiguration.getKeys();
             Map<String, String> namedGroups = new HashMap<String, String>();
             
@@ -38,7 +41,7 @@ public class NamedGroupConfigurationProvider {
             return namedGroups;
         }
     }
-    
+      
     private InputStream loadResourceFromClasspath(String resource) {
         ClassLoader classloader = this.getClass().getClassLoader();
         return classloader.getResourceAsStream(resource);

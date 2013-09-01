@@ -19,14 +19,17 @@ import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.w3c.tidy.Tidy;
 
+import com.grexdev.pimabank.menuprovider.exception.MenuProviderException;
+import com.grexdev.pimabank.menuprovider.parser.descriptor.MenuPageDescriptor;
+
 @Slf4j
 public class HtmlPageTextContentExtractor {
 
     private XPathFactory xPathFactory = XPathFactory.newInstance();
 
-    public String extractTextContent(InputStream inputStream, String htmlBlockXPathExpression) throws XPathExpressionException {
+    public String extractTextContent(MenuPageDescriptor pageDescriptor, InputStream inputStream) throws XPathExpressionException, MenuProviderException {
         Document document = getValidXmlDocument(inputStream);
-        XPathExpression xPathExpression = constructXPathExpression(htmlBlockXPathExpression);
+        XPathExpression xPathExpression = constructXPathExpression(pageDescriptor.getXPathExpression());
         Object result = xPathExpression.evaluate(document, XPathConstants.NODESET);
 
         StringBuilder textContent = new StringBuilder();
@@ -46,6 +49,11 @@ public class HtmlPageTextContentExtractor {
         }
         
         log.debug("Extracted text is >>>{}<<<", textContent.toString());
+        
+        if (StringUtils.isEmpty(textContent)) {
+            throw new MenuProviderException("Data extracted from page content using XPath expression is empty, page=" + pageDescriptor.getPageId());
+        }
+        
         return textContent.toString();
     }
 

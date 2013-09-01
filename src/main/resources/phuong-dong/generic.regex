@@ -1,16 +1,3 @@
-############## unnamed groups, defined for simplicity ##########
-# Unnamed groups should have key preffixed with "TAG_" phrase !!
-# '\' char is escape character, so to produce '\' in the output '\\' must be used 
-
-# 13,99 or 13
-#TAG_PRICE = \\d+(?:,\\d+)? 
-
-# whole line
-#TAG_LINE = ^.*?$
-
-# any string - reluctant, not greedy version
-#TAG_ANY_STRING = .*?
-
 ######################### NAMED REGEXP GROUPS #######################
 # Group names must not contain chars other than letters and digits !
 #
@@ -23,25 +10,16 @@
 #
 # ROOT0 is entry point and behave as BLOCK named group 
 
-# price of meal
-PRICE1 = (?<PRICE1>${TAG_PRICE})
-
-# whole line with number and dot, i.e ("1.:)
-ID3 = ((?<ID3>^\\d+)\\.$)
-
 # whole line with meal name
 NAME3 = (?<NAME3>${TAG_TEXT_LINE})
 
+# price of meal
+PRICE3 = (?<PRICE3>${TAG_PRICE})
+
 # menu position
-ITEMBLOCK2 = (?<ITEMBLOCK2>${TAG_ANY_STRING}${ID3}${TAG_ANY_STRING}${NAME3})
+ITEMBLOCK2 = (?<ITEMBLOCK2>${TAG_ANY_STRING}${NAME3}${TAG_ANY_STRING}${PRICE3})
 
 ITEMLOOP1 = (?<ITEMLOOP1>${ITEMBLOCK2}*)
 
-SOUPNAME1 = (?<SOUPNAME1>${TAG_TEXT_LINE})
-
-SOUPPRICE1 = (?<SOUPPRICE1>${TAG_PRICE})
-
-TAG_SOUP = Zupa dnia${TAG_ANY_STRING}${SOUPNAME1}${TAG_ANY_STRING}${SOUPPRICE1}
-
 # Main regular expression
-ROOT0 = ${TAG_ANY_STRING}${PRICE1}${TAG_ANY_STRING}${ITEMLOOP1}${TAG_ANY_STRING}${TAG_SOUP}${TAG_ANY_STRING};
+ROOT0 = ${TAG_ANY_STRING}${ITEMLOOP1}${TAG_ANY_STRING};

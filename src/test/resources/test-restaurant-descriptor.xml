@@ -4,7 +4,8 @@
 	<baseUrl>http://peperone.pl/</baseUrl>
 	<menuPages>
 		<menuPage>
-			<pageName>calzone</pageName>
+		    <pageId>calzone</pageId>
+			<pageName>Calzone</pageName>
 			<urlSuffix>calzone-menu</urlSuffix>
 			<xPathExpression>//table[@class='contentpaneopen']//span//node()</xPathExpression> 
 			<parserRegexpResource>peperone/generic.regex</parserRegexpResource>

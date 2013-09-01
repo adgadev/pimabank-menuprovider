@@ -12,6 +12,8 @@ import org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 
+import com.grexdev.pimabank.menuprovider.parser.descriptor.MenuPageDescriptor;
+
 @Slf4j
 public class VelocityXmlTemplator {
 
@@ -24,10 +26,13 @@ public class VelocityXmlTemplator {
         velocityEngine.init();
     }
 
-    public String createDocumentUsingTemplate(String templateName, Object groupRoot) {
+    public String createDocumentUsingTemplate(MenuPageDescriptor descriptor, Object groupRoot) {
+        String templateName = descriptor.getVelocityTemplateResource();
         Template template = velocityEngine.getTemplate(templateName);
         VelocityContext context = new VelocityContext();
         context.put("root", groupRoot);
+        context.put("pageDescriptor", descriptor);
+        
 
         StringWriter stringWriter = new StringWriter();
         template.merge(context, stringWriter);

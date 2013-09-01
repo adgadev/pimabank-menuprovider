@@ -27,7 +27,8 @@ public class RestaurantDescriptorProviderTest {
         assertEquals(descriptor.getMenuPages().size(), 1);
         MenuPageDescriptor menuPageDescriptor = descriptor.getMenuPages().get(0);
 
-        assertEquals(menuPageDescriptor.getPageName(), "calzone");
+        assertEquals(menuPageDescriptor.getPageId(), "calzone");
+        assertEquals(menuPageDescriptor.getPageName(), "Calzone");
         assertEquals(menuPageDescriptor.getUrlSuffix(), "calzone-menu");
         assertEquals(menuPageDescriptor.getParserRegexpResource(), "peperone/generic.regex");
         assertEquals(menuPageDescriptor.getVelocityTemplateResource(), "peperone/generic.vm");

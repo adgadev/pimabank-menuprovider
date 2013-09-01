@@ -76,13 +76,15 @@ public class PeperoneMenuProvider implements MenuProvider {
             InputStream inputStream = httpPageDownloader.downloadPage(fullPageUrl);
 
             HtmlPageTextContentExtractor htmlToTextTransformer = new HtmlPageTextContentExtractor();
-            String text = htmlToTextTransformer.extractTextContent(inputStream, menuPageDescriptor.getXPathExpression());
-
-            Map<String, String> namedRegexpGroups = regexpConfigurationProvider.getNamedRegexpGroups(menuPageDescriptor.getParserRegexpResource());
-            RegexGroupExtractor regexGroupExtractor = new RegexGroupExtractor(configuration, new NamedGroupRegistry(namedRegexpGroups), extractorThreadPool);
+            String text = htmlToTextTransformer.extractTextContent(menuPageDescriptor, inputStream);
+            
+            Map<String, String> namedRegexpGroups = regexpConfigurationProvider.getNamedRegexpGroups(
+                    configuration.getCommonsRegexResourceName(), menuPageDescriptor.getParserRegexpResource());
+            RegexGroupExtractor regexGroupExtractor = new RegexGroupExtractor(configuration, 
+                    new NamedGroupRegistry(namedRegexpGroups), extractorThreadPool);
             Object rootGroup = regexGroupExtractor.extractRegexGroupsValues(text);
 
-            String document = templator.createDocumentUsingTemplate(menuPageDescriptor.getVelocityTemplateResource(), rootGroup);
+            String document = templator.createDocumentUsingTemplate(menuPageDescriptor, rootGroup);
             return dtoInstantiator.convertXmlToMenuListDto(document);
 
         } catch (IOException | XPathExpressionException | SAXException | ConfigurationException | InterruptedException | ExecutionException e) {

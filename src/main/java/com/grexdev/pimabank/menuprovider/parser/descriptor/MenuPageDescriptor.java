@@ -10,6 +10,8 @@ import lombok.ToString;
 @XStreamAlias("menuPage")
 public class MenuPageDescriptor {
 
+    private String pageId;
+    
     private String pageName;
 
     private String urlSuffix;
