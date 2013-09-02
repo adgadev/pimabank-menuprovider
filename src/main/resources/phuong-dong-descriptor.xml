@@ -3,7 +3,7 @@
 	<name>Phuong Dong</name>
 	<baseUrl>http://www.bar-orientalny.pl/pl/</baseUrl>
 	<menuPages>
-		<menuPage>
+	 	<menuPage>
 			<pageId>male-porcje</pageId>
 			<pageName>Małe porcje</pageName>
 			<urlSuffix>51906/0/Male_porcje.html</urlSuffix>
@@ -143,8 +143,8 @@
 			<pageName>Napoje zimne</pageName>
 			<urlSuffix>45522/0/NAPOJE_ZIMNE.html</urlSuffix>
 			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
-			<parserRegexpResource>phuong-dong/generic.regex</parserRegexpResource>
-			<velocityTemplateResource>phuong-dong/generic.vm</velocityTemplateResource>
+			<parserRegexpResource>phuong-dong/napoje.regex</parserRegexpResource>
+			<velocityTemplateResource>phuong-dong/napoje.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
 		</menuPage>
 		<menuPage>
@@ -152,8 +152,8 @@
 			<pageName>Piwo</pageName>
 			<urlSuffix>45523/0/PIWO.html</urlSuffix>
 			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
-			<parserRegexpResource>phuong-dong/generic.regex</parserRegexpResource>
-			<velocityTemplateResource>phuong-dong/generic.vm</velocityTemplateResource>
+			<parserRegexpResource>phuong-dong/napoje.regex</parserRegexpResource>
+			<velocityTemplateResource>phuong-dong/napoje.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
 		</menuPage>
 	</menuPages>

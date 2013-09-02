@@ -12,11 +12,14 @@ TAG_LETTER_OR_DIGIT = (?:${TAG_LETTER}|\\d)
 # 13,99 or 13
 TAG_PRICE = \\d+(?:,\\d+)? 
 
-# a line of text starting with alphanumeric char 
+# a line of text starting with letter char 
 TAG_TEXT_LINE = ^${TAG_LETTER}.*?$
 
 # block of text starting from any letter to the nearest digit
 TAG_TEXT = ${TAG_LETTER}[^\\d]*
+
+# a line of text starting with letter char 
+TAG_ALPHANUM_LINE = ^${TAG_LETTER_OR_DIGIT}.*?$
 
 # any string - reluctant, not greedy version
 TAG_ANY_STRING = .*? 

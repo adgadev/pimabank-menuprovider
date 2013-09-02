@@ -4,9 +4,9 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 
 import com.grexdev.pimabank.menuprovider.exception.MenuProviderException;
+import com.grexdev.pimabank.menuprovider.parser.RegexParserMenuProvider;
 import com.grexdev.pimabank.menuprovider.parser.descriptor.RestaurantDescriptor;
 import com.grexdev.pimabank.menuprovider.parser.descriptor.RestaurantDescriptorProvider;
-import com.grexdev.pimabank.menuprovider.peperone.PeperoneMenuProvider;
 
 @RequiredArgsConstructor
 public class MenuProviderFactory {
@@ -34,7 +34,7 @@ public class MenuProviderFactory {
     public MenuProvider createMenuProvider(RestaurantDescriptorLocation restaurant) throws MenuProviderException {
         if (restaurant != null) {
             RestaurantDescriptor restaurantDescriptor = provider.getRestaurantDescriptor(restaurant.getRestaurantDescriptorLocation());
-            return new PeperoneMenuProvider(configuration.getMenuProviderConfiguration(), restaurantDescriptor);
+            return new RegexParserMenuProvider(configuration.getMenuProviderConfiguration(), restaurantDescriptor);
         } else {
             throw new IllegalArgumentException("Invalid restaurants descriptor location");
         }

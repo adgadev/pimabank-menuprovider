@@ -1,62 +1,28 @@
-package com.grexdev.pimabank.menuprovider.peperone;
+package com.grexdev.pimabank.menuprovider.parser;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import com.grexdev.pimabank.menuprovider.dto.MenuPage;
 import com.grexdev.pimabank.menuprovider.dto.MenuPosition;
 import com.grexdev.pimabank.menuprovider.exception.MenuProviderException;
-import com.grexdev.pimabank.menuprovider.parser.descriptor.MenuPageDescriptor;
+import com.grexdev.pimabank.menuprovider.parser.RegexParserMenuProvider;
 import com.grexdev.pimabank.menuprovider.parser.descriptor.RestaurantDescriptor;
-import com.grexdev.pimabank.menuprovider.parser.descriptor.RestaurantDescriptorProvider;
-import com.grexdev.pimabank.menuprovider.peperone.PeperoneMenuProvider;
 
-public class PeperoneMenuProviderTest {
-
-    private static final int SERVER_PORT = 18723;
-
-    private HttpPageFromClasspathServer server = new HttpPageFromClasspathServer("peperone/peperone.pl-thursday");
-
-    private MenuProviderConfiguration configuration = MenuProviderConfiguration.getDefault();
+public class PeperoneMenuProviderTest extends AbstractMenuProviderTest {
     
-    @BeforeClass
-    public void setUp() throws IOException {
-        server.startServer(SERVER_PORT);
-    }
-
-    @AfterClass
-    public void tearDown() throws IOException {
-        server.stopServer();
-    }
-    
-    private RestaurantDescriptor createRestaurantDescriptor(String menuPage) throws MenuProviderException {
-        RestaurantDescriptor restaurantDescriptor = new RestaurantDescriptorProvider().getRestaurantDescriptor("peperone-descriptor.xml");
-        restaurantDescriptor.setBaseUrl(String.format("http://localhost:%s/", SERVER_PORT)); // without it uses real page
-        
-        // alter descriptor to use only one page, which matches given name
-        for (MenuPageDescriptor menuPageDescriptor : restaurantDescriptor.getMenuPages()) {
-            if (menuPageDescriptor.getPageId().equals(menuPage)) {
-                restaurantDescriptor.setMenuPages(Arrays.asList(menuPageDescriptor));
-                return restaurantDescriptor;
-            }
-        }
-        throw new RuntimeException("Page with given name not found in descriptor");
+    public PeperoneMenuProviderTest() {
+        super("peperone-descriptor.xml", "peperone/peperone.pl-thursday");
     }
 
     @Test
     public void shouldParseMenudniaPage() throws MenuProviderException {
         // given
         RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("menudnia");
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
+        RegexParserMenuProvider peperoneMenuProvider = new RegexParserMenuProvider(getConfiguration(), restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -70,7 +36,7 @@ public class PeperoneMenuProviderTest {
 
         // given
         RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("calzone");
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
+        RegexParserMenuProvider peperoneMenuProvider = new RegexParserMenuProvider(getConfiguration(), restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -84,7 +50,7 @@ public class PeperoneMenuProviderTest {
 
         // given
         RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("dladzieci");
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
+        RegexParserMenuProvider peperoneMenuProvider = new RegexParserMenuProvider(getConfiguration(), restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -98,7 +64,7 @@ public class PeperoneMenuProviderTest {
 
         // given
         RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("makarony");
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
+        RegexParserMenuProvider peperoneMenuProvider = new RegexParserMenuProvider(getConfiguration(), restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -112,7 +78,7 @@ public class PeperoneMenuProviderTest {
 
         // given
         RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("drobiryby");
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
+        RegexParserMenuProvider peperoneMenuProvider = new RegexParserMenuProvider(getConfiguration(), restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -126,7 +92,7 @@ public class PeperoneMenuProviderTest {
 
         // given
         RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("napoje");
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
+        RegexParserMenuProvider peperoneMenuProvider = new RegexParserMenuProvider(getConfiguration(), restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -140,7 +106,7 @@ public class PeperoneMenuProviderTest {
 
         // given
         RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("dodatki");
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
+        RegexParserMenuProvider peperoneMenuProvider = new RegexParserMenuProvider(getConfiguration(), restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -154,7 +120,7 @@ public class PeperoneMenuProviderTest {
 
         // given
         RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("pork");
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
+        RegexParserMenuProvider peperoneMenuProvider = new RegexParserMenuProvider(getConfiguration(), restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -168,7 +134,7 @@ public class PeperoneMenuProviderTest {
 
         // given
         RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("salaty");
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
+        RegexParserMenuProvider peperoneMenuProvider = new RegexParserMenuProvider(getConfiguration(), restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -182,7 +148,7 @@ public class PeperoneMenuProviderTest {
 
         // given
         RestaurantDescriptor restaurantDescriptor = createRestaurantDescriptor("pizza");
-        PeperoneMenuProvider peperoneMenuProvider = new PeperoneMenuProvider(configuration, restaurantDescriptor);
+        RegexParserMenuProvider peperoneMenuProvider = new RegexParserMenuProvider(getConfiguration(), restaurantDescriptor);
 
         // when
         List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
@@ -357,16 +323,7 @@ public class PeperoneMenuProviderTest {
                     "Sos pomidorowy, mozzarella, lazur pleśniowy, marynowane kawałki kurczaka, szynka, szpinak, rukola i czosnek") //
             .toMenuPositionArray();
 
-    private void ensureMenuPositionsAreCorrect(List<MenuPage> menuPages, String expectedCategoryName,
-            MenuPosition[] expectedMenuPositions) {
-        assertNotNull(menuPages);
-        assertEquals(menuPages.size(), 1);
-        MenuPage page = menuPages.get(0);
 
-        assertEquals(page.getCategory(), expectedCategoryName);
-        assertEquals(page.getMenuPositions().size(), expectedMenuPositions.length);
-        assertEquals(page.getMenuPositions().toArray(), expectedMenuPositions);
-    }
 
     private class PizzaListBuilder {
 

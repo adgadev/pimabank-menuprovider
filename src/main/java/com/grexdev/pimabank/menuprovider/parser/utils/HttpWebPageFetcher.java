@@ -11,12 +11,12 @@ import lombok.RequiredArgsConstructor;
 
 import org.apache.commons.io.IOUtils;
 
-import com.grexdev.pimabank.menuprovider.peperone.MenuProviderConfiguration;
+import com.grexdev.pimabank.menuprovider.parser.RegexParserMenuProviderConfiguration;
 
 @RequiredArgsConstructor
 public class HttpWebPageFetcher {
     
-    private final MenuProviderConfiguration configuration;
+    private final RegexParserMenuProviderConfiguration configuration;
 
     public InputStream downloadPage(String urlAddress) throws IOException {
         URL url = new URL(urlAddress);

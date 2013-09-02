@@ -1,4 +1,4 @@
-package com.grexdev.pimabank.menuprovider.peperone;
+package com.grexdev.pimabank.menuprovider.parser;
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -31,9 +31,9 @@ import com.grexdev.pimabank.menuprovider.parser.utils.HttpWebPageFetcher;
 import com.grexdev.pimabank.menuprovider.parser.utils.VelocityXmlTemplator;
 
 @Slf4j
-public class PeperoneMenuProvider implements MenuProvider {
+public class RegexParserMenuProvider implements MenuProvider {
     
-    private final MenuProviderConfiguration configuration;
+    private final RegexParserMenuProviderConfiguration configuration;
     
     private final RestaurantDescriptor restaurantDescriptor;
 
@@ -45,7 +45,7 @@ public class PeperoneMenuProvider implements MenuProvider {
 
     private DigesterDtoInstantiator dtoInstantiator = new DigesterDtoInstantiator();
 
-    public PeperoneMenuProvider(MenuProviderConfiguration configuration, RestaurantDescriptor restaurantDescriptor) {
+    public RegexParserMenuProvider(RegexParserMenuProviderConfiguration configuration, RestaurantDescriptor restaurantDescriptor) {
         this.configuration = configuration;
         this.restaurantDescriptor = restaurantDescriptor;
         httpPageDownloader =  new HttpWebPageFetcher(configuration);

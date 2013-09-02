@@ -1,11 +1,11 @@
-package com.grexdev.pimabank.menuprovider.peperone;
+package com.grexdev.pimabank.menuprovider.parser;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class MenuProviderConfiguration {
+public class RegexParserMenuProviderConfiguration {
     
     private static int DEFAULT_HTTP_FETCHER_READ_TIMOUT = 60000; 
     
@@ -23,8 +23,8 @@ public class MenuProviderConfiguration {
     
     private String commonsRegexResourceName;
     
-    public static MenuProviderConfiguration getDefault() {
-        MenuProviderConfiguration configuration = new MenuProviderConfiguration();
+    public static RegexParserMenuProviderConfiguration getDefault() {
+        RegexParserMenuProviderConfiguration configuration = new RegexParserMenuProviderConfiguration();
         configuration.httpFetcherConnectionTimeout = DEFAULT_HTTP_FETCHER_CONNECTION_TIMOUT;
         configuration.httpFetcherReadTimeout = DEFAULT_HTTP_FETCHER_READ_TIMOUT;
         configuration.regexpMatcherTimeout = DEFAULT_REGEXP_MATCHER_TIMEOUT;

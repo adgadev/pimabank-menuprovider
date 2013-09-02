@@ -38,6 +38,7 @@ public class HtmlPageTextContentExtractor {
 
         for (int i = 0; i < nodes.getLength(); i++) {
             Node node = nodes.item(i);
+            // TODO: check if replace needed
             String content = node.getNodeValue().replace("\u00a0","");
             String trimmedContent = StringUtils.trimToNull(content);
             

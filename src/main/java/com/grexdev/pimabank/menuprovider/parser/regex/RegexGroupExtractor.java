@@ -13,9 +13,9 @@ import java.util.concurrent.TimeoutException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.grexdev.pimabank.menuprovider.parser.RegexParserMenuProviderConfiguration;
 import com.grexdev.pimabank.menuprovider.parser.regex.NamedGroupRegistry.GroupDetails;
 import com.grexdev.pimabank.menuprovider.parser.regex.NamedGroupRegistry.GroupType;
-import com.grexdev.pimabank.menuprovider.peperone.MenuProviderConfiguration;
 
 
 import lombok.RequiredArgsConstructor;
@@ -25,7 +25,7 @@ import lombok.extern.slf4j.Slf4j;
 @RequiredArgsConstructor
 public class RegexGroupExtractor {
 
-    private final MenuProviderConfiguration configuration;
+    private final RegexParserMenuProviderConfiguration configuration;
     
     private final NamedGroupRegistry registry;
     
