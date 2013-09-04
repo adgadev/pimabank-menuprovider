@@ -25,10 +25,10 @@ import com.grexdev.pimabank.menuprovider.parser.descriptor.MenuPageDescriptor;
 @Slf4j
 public class HtmlPageTextContentExtractor {
 
-    private XPathFactory xPathFactory = XPathFactory.newInstance();
-
-    public String extractTextContent(MenuPageDescriptor pageDescriptor, InputStream inputStream) throws XPathExpressionException, MenuProviderException {
-        Document document = getValidXmlDocument(inputStream);
+    private final XPathFactory xPathFactory = XPathFactory.newInstance();
+    
+    public String extractTextContent(MenuPageDescriptor pageDescriptor, String pageEncoding, InputStream inputStream) throws XPathExpressionException, MenuProviderException {
+        Document document = getValidXmlDocument(inputStream, pageEncoding);
         XPathExpression xPathExpression = constructXPathExpression(pageDescriptor.getXPathExpression());
         Object result = xPathExpression.evaluate(document, XPathConstants.NODESET);
 
@@ -58,12 +58,12 @@ public class HtmlPageTextContentExtractor {
         return textContent.toString();
     }
 
-    private Document getValidXmlDocument(InputStream inputStream) {
+    private Document getValidXmlDocument(InputStream inputStream, String pageEncoding) {
         Tidy tidy = new Tidy();
         tidy.setQuiet(true);
         tidy.setShowWarnings(false);
-                
-        Reader inputStreamReader = new InputStreamReader(inputStream, Charset.forName("UTF-8"));
+        
+        Reader inputStreamReader = new InputStreamReader(inputStream, Charset.forName(pageEncoding));
         Document tidyDOM = tidy.parseDOM(inputStreamReader, null);
         return tidyDOM;
     }

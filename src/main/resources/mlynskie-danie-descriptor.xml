@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<restaurant>
+	<name>Młyńskie danie</name>
+	<baseUrl>http://www.mlynskiedanie.pl/</baseUrl>
+	<pageEncoding>ISO-8859-2</pageEncoding>
+	<menuPages>
+	     <menuPage>
+			<pageId>nowosci</pageId>
+			<pageName>Nowości</pageName>
+			<urlSuffix>dowoz.html</urlSuffix>
+			<xPathExpression>//table[@id='table1']//node()</xPathExpression>
+			<parserRegexpResource>mlynskie-danie/nowosci.regex</parserRegexpResource>
+			<velocityTemplateResource>mlynskie-danie/generic.vm</velocityTemplateResource>
+			<!-- TODO: fix parsing -->
+			<pageDisabled>true</pageDisabled>
+		</menuPage>
+ 	 	<menuPage>
+			<pageId>pierogi</pageId>
+			<pageName>Pierogi</pageName>
+			<urlSuffix>dowoz.html</urlSuffix>
+			<xPathExpression>//table[@id='table1']//node()</xPathExpression>
+			<parserRegexpResource>mlynskie-danie/pierogi.regex</parserRegexpResource>
+			<velocityTemplateResource>mlynskie-danie/generic.vm</velocityTemplateResource>
+			<pageDisabled>false</pageDisabled>
+		</menuPage>
+ 		<menuPage>
+			<pageId>dania-jarskie</pageId>
+			<pageName>Dania jarskie</pageName>
+			<urlSuffix>dowoz.html</urlSuffix>
+			<xPathExpression>//table[@id='table1']//node()</xPathExpression>
+			<parserRegexpResource>mlynskie-danie/dania-jarskie.regex</parserRegexpResource>
+			<velocityTemplateResource>mlynskie-danie/generic.vm</velocityTemplateResource>
+			<pageDisabled>false</pageDisabled>
+		</menuPage>
+ 		<menuPage>
+			<pageId>dania-miesne</pageId>
+			<pageName>Dania mięsne</pageName>
+			<urlSuffix>dowoz.html</urlSuffix>
+			<xPathExpression>//table[@id='table1']//node()</xPathExpression>
+			<parserRegexpResource>mlynskie-danie/dania-miesne.regex</parserRegexpResource>
+			<velocityTemplateResource>mlynskie-danie/generic.vm</velocityTemplateResource>
+			<pageDisabled>false</pageDisabled>
+		</menuPage>
+ 		<menuPage>
+			<pageId>zupy</pageId>
+			<pageName>Zupy</pageName>
+			<urlSuffix>dowoz.html</urlSuffix>
+			<xPathExpression>//table[@id='table1']//node()</xPathExpression>
+			<parserRegexpResource>mlynskie-danie/zupy.regex</parserRegexpResource>
+			<velocityTemplateResource>mlynskie-danie/generic.vm</velocityTemplateResource>
+			<pageDisabled>false</pageDisabled>
+		</menuPage>
+	 	<menuPage>
+			<pageId>dodatki</pageId>
+			<pageName>Dodatki</pageName>
+			<urlSuffix>dowoz.html</urlSuffix>
+			<xPathExpression>//table[@id='table1']//node()</xPathExpression>
+			<parserRegexpResource>mlynskie-danie/dodatki.regex</parserRegexpResource>
+			<velocityTemplateResource>mlynskie-danie/generic.vm</velocityTemplateResource>
+			<pageDisabled>false</pageDisabled>
+		</menuPage>
+	</menuPages>
+</restaurant>

@@ -2,6 +2,7 @@
 <restaurant>
 	<name>Peperone</name>
 	<baseUrl>http://peperone.pl/</baseUrl>
+	<pageEncoding>UTF-8</pageEncoding>
 	<menuPages>
 		<menuPage>
 			<pageId>menudnia</pageId>

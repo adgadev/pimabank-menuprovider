@@ -53,6 +53,8 @@ public class RegexGroupExtractor {
 
     private Object processGroup(GroupDetails parentGroupDetails, String content) {
         log.debug("Processing group {}", parentGroupDetails);
+        //log.debug("Group content = >>>{}<<<", content);
+        
         Matcher matcher = getMatcher(parentGroupDetails, content);
         
         if (parentGroupDetails.isType(GroupType.BLOCK)) {

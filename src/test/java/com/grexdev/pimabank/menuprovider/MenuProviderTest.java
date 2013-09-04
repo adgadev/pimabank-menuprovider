@@ -66,6 +66,21 @@ public class MenuProviderTest {
         // then
         printMenu("PHUONG DONG", menuPages);
     }
+    
+    @Test(groups = "endToEnd")
+    public void shouldGetMlynskieDanieMenu() throws MenuProviderException {
+
+        // given
+        MenuProviderFactoryConfiguration configuration = MenuProviderFactoryConfiguration.getDefaultConfiguration();
+        MenuProviderFactory factory = new MenuProviderFactory(configuration);
+        MenuProvider peperoneMenuProvider = factory.createMenuProvider(Restaurant.MLYNSKIE_DANIE);
+
+        // when
+        List<MenuPage> menuPages = peperoneMenuProvider.fetchRestaurantMenu();
+
+        // then
+        printMenu("MLYNSKIE DANIE", menuPages);
+    }
    
     private void printMenu(String name, List<MenuPage> menuPages) {
         log.info("========================= {} MENU =======================\n", name);

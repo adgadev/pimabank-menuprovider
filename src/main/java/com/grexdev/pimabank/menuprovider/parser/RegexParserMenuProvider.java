@@ -60,7 +60,7 @@ public class RegexParserMenuProvider implements MenuProvider {
             for (MenuPageDescriptor menuPageDescriptor : restaurantDescriptor.getMenuPages()) {
                 if (menuPageDescriptor.isPageDisabled() == false) {
                     log.info("Fetching / parsing menu for page {}", menuPageDescriptor);
-                    menuPages.add(fetchRestaurantMenuPage(restaurantDescriptor.getBaseUrl(), menuPageDescriptor, extractorThreadPool));
+                    menuPages.add(fetchRestaurantMenuPage(restaurantDescriptor, menuPageDescriptor, extractorThreadPool));
                 }
             }
         } finally {
@@ -70,13 +70,13 @@ public class RegexParserMenuProvider implements MenuProvider {
         return menuPages;
     }
     
-    private MenuPage fetchRestaurantMenuPage(String restaurantPageBaseUrl, MenuPageDescriptor menuPageDescriptor, ExecutorService extractorThreadPool) throws MenuProviderException {
+    private MenuPage fetchRestaurantMenuPage(RestaurantDescriptor restaurantDescriptor, MenuPageDescriptor menuPageDescriptor, ExecutorService extractorThreadPool) throws MenuProviderException {
         try {
-            String fullPageUrl = restaurantPageBaseUrl + menuPageDescriptor.getUrlSuffix();
+            String fullPageUrl = restaurantDescriptor.getBaseUrl() + menuPageDescriptor.getUrlSuffix();
             InputStream inputStream = httpPageDownloader.downloadPage(fullPageUrl);
 
             HtmlPageTextContentExtractor htmlToTextTransformer = new HtmlPageTextContentExtractor();
-            String text = htmlToTextTransformer.extractTextContent(menuPageDescriptor, inputStream);
+            String text = htmlToTextTransformer.extractTextContent(menuPageDescriptor, restaurantDescriptor.getPageEncoding(), inputStream);
             
             Map<String, String> namedRegexpGroups = regexpConfigurationProvider.getNamedRegexpGroups(
                     configuration.getCommonsRegexResourceName(), menuPageDescriptor.getParserRegexpResource());

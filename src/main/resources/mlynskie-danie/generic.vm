@@ -1,0 +1,13 @@
+<menu>
+	<category>$root.CATEGORY1</category>
+	<menupositions>
+		#foreach($menuposition in $root.ITEMLOOP1)
+		<menuposition>
+			#set( $currentIndex = $foreach.index + 1 )
+			<id>$currentIndex</id>
+			<name>$menuposition.NAME3</name>
+			<price>$menuposition.PRICE3</price>
+		</menuposition>
+	#end	
+	</menupositions>
+</menu>

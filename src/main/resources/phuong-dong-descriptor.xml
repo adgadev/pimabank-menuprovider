@@ -2,6 +2,7 @@
 <restaurant>
 	<name>Phuong Dong</name>
 	<baseUrl>http://www.bar-orientalny.pl/pl/</baseUrl>
+	<pageEncoding>UTF-8</pageEncoding>
 	<menuPages>
 	 	<menuPage>
 			<pageId>male-porcje</pageId>

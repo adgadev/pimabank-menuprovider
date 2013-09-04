@@ -17,6 +17,8 @@ public class RestaurantDescriptor {
     private String name;
 
     private String baseUrl;
+    
+    private String pageEncoding;
 
     private List<MenuPageDescriptor> menuPages;
 
