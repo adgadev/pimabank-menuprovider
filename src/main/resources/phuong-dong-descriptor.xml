@@ -1,23 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <restaurant>
 	<name>Phuong Dong</name>
-	<baseUrl>http://www.bar-orientalny.pl/pl/</baseUrl>
+	<baseUrl>http://www.bar-orientalny.pl/pl/lubelska-10/menu/</baseUrl>
 	<pageEncoding>UTF-8</pageEncoding>
 	<menuPages>
 	 	<menuPage>
 			<pageId>male-porcje</pageId>
 			<pageName>Małe porcje</pageName>
-			<urlSuffix>51906/0/Male_porcje.html</urlSuffix>
-			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
+			<urlSuffix>małe-porcje.html</urlSuffix>
+			<xPathExpression>//div[@class='item-page']//table//node()</xPathExpression>
 			<parserRegexpResource>phuong-dong/generic.regex</parserRegexpResource>
 			<velocityTemplateResource>phuong-dong/generic.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
 		</menuPage>
-		<menuPage>
+	 	<menuPage>
 			<pageId>zupy</pageId>
 			<pageName>Zupy</pageName>
-			<urlSuffix>45508/0/Zupy.html</urlSuffix>
-			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
+			<urlSuffix>zupy.html</urlSuffix>
+			<xPathExpression>//div[@class='item-page']//table//node()</xPathExpression>
 			<parserRegexpResource>phuong-dong/generic.regex</parserRegexpResource>
 			<velocityTemplateResource>phuong-dong/generic.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
@@ -25,8 +25,8 @@
 		<menuPage>
 			<pageId>przystawki</pageId>
 			<pageName>Przystawki z surówką</pageName>
-			<urlSuffix>45509/0/PRZYSTAWKI_z_surowka.html</urlSuffix>
-			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
+			<urlSuffix>przystawki.html</urlSuffix>
+			<xPathExpression>//div[@class='item-page']//table//node()</xPathExpression>
 			<parserRegexpResource>phuong-dong/generic.regex</parserRegexpResource>
 			<velocityTemplateResource>phuong-dong/generic.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
@@ -34,8 +34,8 @@
 		<menuPage>
 			<pageId>dania-z-kurczaka</pageId>
 			<pageName>Dania z kurczaka z ryżem i surówką</pageName>
-			<urlSuffix>45510/0/DANIA_Z_KURCZAKA_z_ryzem_i_surowka.html</urlSuffix>
-			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
+			<urlSuffix>dania-z-kurczaka.html</urlSuffix>
+			<xPathExpression>//div[@class='item-page']//table//node()</xPathExpression>
 			<parserRegexpResource>phuong-dong/generic.regex</parserRegexpResource>
 			<velocityTemplateResource>phuong-dong/generic.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
@@ -43,8 +43,8 @@
 		<menuPage>
 			<pageId>dania-z-kaczki</pageId>
 			<pageName>Dania z kaczki z ryżem i surówką</pageName>
-			<urlSuffix>45511/0/DANIA_Z_KACZKI.html</urlSuffix>
-			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
+			<urlSuffix>dania-z-kaczki.html</urlSuffix>
+			<xPathExpression>//div[@class='item-page']//table//node()</xPathExpression>
 			<parserRegexpResource>phuong-dong/generic.regex</parserRegexpResource>
 			<velocityTemplateResource>phuong-dong/generic.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
@@ -52,8 +52,8 @@
 		<menuPage>
 			<pageId>dania-z-wieprzowiny</pageId>
 			<pageName>Dania z wierprzowiny z ryżem i surówką</pageName>
-			<urlSuffix>45512/0/DANIA_Z_WIEPRZOWINY.html</urlSuffix>
-			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
+			<urlSuffix>dania-z-wieprzowiny.html</urlSuffix>
+			<xPathExpression>//div[@class='item-page']//table//node()</xPathExpression>
 			<parserRegexpResource>phuong-dong/generic.regex</parserRegexpResource>
 			<velocityTemplateResource>phuong-dong/generic.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
@@ -61,8 +61,8 @@
 		<menuPage>
 			<pageId>dania-z-cieleciny</pageId>
 			<pageName>Dania z cielęciny z ryżem i surówką</pageName>
-			<urlSuffix>45513/0/DANIA_Z_CIELECINY.html</urlSuffix>
-			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
+			<urlSuffix>dania-z-cielęciny.html</urlSuffix>
+			<xPathExpression>//div[@class='item-page']//table//node()</xPathExpression>
 			<parserRegexpResource>phuong-dong/generic.regex</parserRegexpResource>
 			<velocityTemplateResource>phuong-dong/generic.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
@@ -70,8 +70,8 @@
 		<menuPage>
 			<pageId>dania-z-wolowiny</pageId>
 			<pageName>Dania z wołowiny z ryżem i surówką</pageName>
-			<urlSuffix>45514/0/DANIA_Z_WOLOWINA.html</urlSuffix>
-			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
+			<urlSuffix>dania-z-wołowiny.html</urlSuffix>
+			<xPathExpression>//div[@class='item-page']//table//node()</xPathExpression>
 			<parserRegexpResource>phuong-dong/generic.regex</parserRegexpResource>
 			<velocityTemplateResource>phuong-dong/generic.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
@@ -79,8 +79,8 @@
 		<menuPage>
 			<pageId>dania-z-ryb</pageId>
 			<pageName>Dania z ryb z ryżem i surówką</pageName>
-			<urlSuffix>45515/0/DANIA_Z_RYB.html</urlSuffix>
-			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
+			<urlSuffix>dania-z-ryb.html</urlSuffix>
+			<xPathExpression>//div[@class='item-page']//table//node()</xPathExpression>
 			<parserRegexpResource>phuong-dong/generic.regex</parserRegexpResource>
 			<velocityTemplateResource>phuong-dong/generic.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
@@ -88,8 +88,8 @@
 		<menuPage>
 			<pageId>owoce-morza</pageId>
 			<pageName>Owoce morza z ryżem i surówką</pageName>
-			<urlSuffix>45516/0/OWOCE_MORZA.html</urlSuffix>
-			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
+			<urlSuffix>owoce-morza.html</urlSuffix>
+			<xPathExpression>//div[@class='item-page']//table//node()</xPathExpression>
 			<parserRegexpResource>phuong-dong/generic.regex</parserRegexpResource>
 			<velocityTemplateResource>phuong-dong/generic.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
@@ -97,8 +97,8 @@
 		<menuPage>
 			<pageId>dania-wegetarianskie</pageId>
 			<pageName>Dania wegetariańskie z ryżem i surówką</pageName>
-			<urlSuffix>45517/0/DANIA_WEGETARIANSKIE.html</urlSuffix>
-			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
+			<urlSuffix>dania-wegetariańskie.html</urlSuffix>
+			<xPathExpression>//div[@class='item-page']//table//node()</xPathExpression>
 			<parserRegexpResource>phuong-dong/generic.regex</parserRegexpResource>
 			<velocityTemplateResource>phuong-dong/generic.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
@@ -106,8 +106,8 @@
 		<menuPage>
 			<pageId>dania-z-ryzem</pageId>
 			<pageName>Dania z ryżem lub makaronem z surówką</pageName>
-			<urlSuffix>45518/0/DANIA_Z_RYZEM_LUB_MAKARONEM.html</urlSuffix>
-			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
+			<urlSuffix>makaron-i-ryż.html</urlSuffix>
+			<xPathExpression>//div[@class='item-page']//table//node()</xPathExpression>
 			<parserRegexpResource>phuong-dong/generic.regex</parserRegexpResource>
 			<velocityTemplateResource>phuong-dong/generic.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
@@ -115,8 +115,8 @@
 		<menuPage>
 			<pageId>desery</pageId>
 			<pageName>Desery</pageName>
-			<urlSuffix>45519/0/DESERY.html</urlSuffix>
-			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
+			<urlSuffix>desery.html</urlSuffix>
+			<xPathExpression>//div[@class='item-page']//table//node()</xPathExpression>
 			<parserRegexpResource>phuong-dong/generic.regex</parserRegexpResource>
 			<velocityTemplateResource>phuong-dong/generic.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
@@ -124,8 +124,8 @@
 		<menuPage>
 			<pageId>dodatki</pageId>
 			<pageName>Dodatki</pageName>
-			<urlSuffix>45520/0/DODATKI.html</urlSuffix>
-			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
+			<urlSuffix>dodatki.html</urlSuffix>
+			<xPathExpression>//div[@class='item-page']//table//node()</xPathExpression>
 			<parserRegexpResource>phuong-dong/generic.regex</parserRegexpResource>
 			<velocityTemplateResource>phuong-dong/generic.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
@@ -133,8 +133,8 @@
 		<menuPage>
 			<pageId>napoje-gorace</pageId>
 			<pageName>Napoje gorące</pageName>
-			<urlSuffix>45521/0/NAPOJE_GORACE.html</urlSuffix>
-			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
+			<urlSuffix>napoje-gorące.html</urlSuffix>
+			<xPathExpression>//div[@class='item-page']//table//node()</xPathExpression>
 			<parserRegexpResource>phuong-dong/generic.regex</parserRegexpResource>
 			<velocityTemplateResource>phuong-dong/generic.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
@@ -142,8 +142,8 @@
 		<menuPage>
 			<pageId>napoje-zimne</pageId>
 			<pageName>Napoje zimne</pageName>
-			<urlSuffix>45522/0/NAPOJE_ZIMNE.html</urlSuffix>
-			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
+			<urlSuffix>napoje-zimne.html</urlSuffix>
+			<xPathExpression>//div[@class='item-page']//table//node()</xPathExpression>
 			<parserRegexpResource>phuong-dong/napoje.regex</parserRegexpResource>
 			<velocityTemplateResource>phuong-dong/napoje.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
@@ -151,8 +151,8 @@
 		<menuPage>
 			<pageId>piwo</pageId>
 			<pageName>Piwo</pageName>
-			<urlSuffix>45523/0/PIWO.html</urlSuffix>
-			<xPathExpression>//div[@id='content_']//table//span//node()</xPathExpression>
+			<urlSuffix>piwo.html</urlSuffix>
+			<xPathExpression>//div[@class='item-page']//table//node()</xPathExpression>
 			<parserRegexpResource>phuong-dong/napoje.regex</parserRegexpResource>
 			<velocityTemplateResource>phuong-dong/napoje.vm</velocityTemplateResource>
 			<pageDisabled>false</pageDisabled>
